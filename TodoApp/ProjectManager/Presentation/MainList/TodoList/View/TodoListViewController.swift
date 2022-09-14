@@ -9,13 +9,6 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-protocol TodoListViewControllerDependencies: AnyObject {
-    func presentEditViewController(item: TodoModel?)
-    func popoverMoveViewController(cell: UITableViewCell?, item: TodoModel)
-    func popoverHistoryViewController(button: UIBarButtonItem)
-    func showErrorAlert(message: String)
-}
-
 final class TodoListViewController: UIViewController {
     private enum Constant {
         static let navigationBarTitle = "Project Manager"
@@ -26,7 +19,7 @@ final class TodoListViewController: UIViewController {
     
     private let mainView = TodoListView()
     private let viewModel: TodoListViewModel
-    private weak var coordinator: TodoListViewControllerDependencies?
+    private weak var coordinator: MainListViewDependencies?
     
     private let bag = DisposeBag()
     
@@ -37,7 +30,7 @@ final class TodoListViewController: UIViewController {
         bind()
     }
     
-    init(viewModel: TodoListViewModel, coordinator: TodoListViewControllerDependencies?) {
+    init(viewModel: TodoListViewModel, coordinator: MainListViewDependencies?) {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
