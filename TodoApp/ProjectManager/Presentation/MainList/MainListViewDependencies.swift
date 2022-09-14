@@ -5,7 +5,7 @@
 //  Created by 이시원 on 2022/09/14.
 //
 
-import Foundation
+import UIKit
 
 protocol MainListViewDependencies: AnyObject {
     func presentEditViewController(item: TodoModel?)
