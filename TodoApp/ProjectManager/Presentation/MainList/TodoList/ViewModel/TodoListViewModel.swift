@@ -24,12 +24,9 @@ protocol TodoListViewModel: TodoListViewModelInput, TodoListViewModelOutput {}
 
 final class DefaultTodoListViewModel {
     private let useCase: TodoListUseCase
-    private let todoLists: BehaviorSubject<[TodoModel]>
     
     init(useCase: TodoListUseCase) {
         self.useCase = useCase
-        
-        todoLists = useCase.readItems()
     }
     
     private let dateFormatter: DateFormatter = {
@@ -44,23 +41,20 @@ final class DefaultTodoListViewModel {
                             dateFormatter: dateFormatter)
         }
     }
-    
-    private func splitList(by state: State) -> Observable<[TodoCellContent]> {
-        todoLists.map { items in
-            items.filter { $0.state == state }
-        }
-        .distinctUntilChanged()
-        .withUnretained(self)
-        .map { (self, items) in
-            self.toTodoCellContents(todoModels: items)
-        }
-    }
 }
 
 extension DefaultTodoListViewModel: TodoListViewModel {
     //MARK: - Output
     var todoList: Observable<[TodoCellContent]> {
-        splitList(by: .todo)
+        useCase
+            .readItems()
+            .map {
+                $0.filter { $0.state == .todo }
+            }
+            .distinctUntilChanged()
+            .compactMap { [weak self] in
+                self?.toTodoCellContents(todoModels: $0)
+            }
     }
 
     var todoListCount: Driver<String> {
@@ -79,7 +73,7 @@ extension DefaultTodoListViewModel: TodoListViewModel {
     //MARK: - Input
     
     func cellSelected(id: UUID) -> TodoModel? {
-        return try? todoLists.value()
+        return try? useCase.readItems().value()
             .first { $0.id == id }
     }
 
