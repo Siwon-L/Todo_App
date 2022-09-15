@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TodoListFlowCoordinatorDependencies {
-    func makeTodoListViewController(coordinator: TodoListViewControllerDependencies) -> TodoListViewController
+    func makePageViewController(coordinator: MainListViewDependencies) -> PageViewController
     func makeTodoEditViewController(item: TodoModel?,
                                     coordinator: TodoEditViewControllerDependencies) -> TodoEditViewController
     func makeTodoMoveViewController(item: TodoModel,
@@ -19,7 +19,7 @@ protocol TodoListFlowCoordinatorDependencies {
 final class TodoListFlowCoordinator {
     private weak var navigationController: UINavigationController?
     private let dependencies: TodoListFlowCoordinatorDependencies
-    private weak var todoListViewController: TodoListViewController?
+    private weak var pageViewController: PageViewController?
     private weak var todoEditViewController: TodoEditViewController?
     private weak var todoMoveViewController: TodoMoveViewController?
     private weak var historyViewController: HistoryViewController?
@@ -32,18 +32,18 @@ final class TodoListFlowCoordinator {
 
 extension TodoListFlowCoordinator {
     func start() {
-        let viewController = dependencies.makeTodoListViewController(coordinator: self)
+        let viewController = dependencies.makePageViewController(coordinator: self)
         
         navigationController?.pushViewController(viewController, animated: true)
-        todoListViewController = viewController
+        pageViewController = viewController
     }
 }
 
-extension TodoListFlowCoordinator: TodoListViewControllerDependencies {
+extension TodoListFlowCoordinator: MainListViewDependencies {
     func presentEditViewController(item: TodoModel?) {
         let viewController = dependencies.makeTodoEditViewController(item: item, coordinator: self)
         viewController.modalPresentationStyle = .formSheet
-        todoListViewController?.present(viewController, animated: true)
+        pageViewController?.present(viewController, animated: true)
         todoEditViewController = viewController
     }
     
@@ -54,7 +54,7 @@ extension TodoListFlowCoordinator: TodoListViewControllerDependencies {
         viewController.popoverPresentationController?.sourceView = cell
         viewController.popoverPresentationController?.sourceRect = cell?.bounds ?? .zero
         viewController.popoverPresentationController?.permittedArrowDirections = .up
-        todoListViewController?.present(viewController, animated: true)
+        pageViewController?.present(viewController, animated: true)
         
         todoMoveViewController = viewController
     }
@@ -62,7 +62,7 @@ extension TodoListFlowCoordinator: TodoListViewControllerDependencies {
     func showErrorAlert(message: String) {
         let alertController = UIAlertController(title: "에러", message: message, preferredStyle: .alert)
         alertController.addAction(.init(title: "확인", style: .default))
-        todoListViewController?.present(alertController, animated: true, completion: nil)
+        pageViewController?.present(alertController, animated: true, completion: nil)
     }
     
     func popoverHistoryViewController(button: UIBarButtonItem) {
@@ -70,7 +70,7 @@ extension TodoListFlowCoordinator: TodoListViewControllerDependencies {
         viewController.modalPresentationStyle = .popover
         viewController.preferredContentSize = CGSize(width: 500, height: 500)
         viewController.popoverPresentationController?.barButtonItem = button
-        todoListViewController?.present(viewController, animated: true)
+        pageViewController?.present(viewController, animated: true)
         
         historyViewController = viewController
     }

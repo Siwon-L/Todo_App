@@ -13,8 +13,8 @@ final class TodoSceneDIContainer {
     private let backUpStorage = FirebaseTodoListStorage()
     private let userStateStorage = UserDefaults()
 
-    private func makeTodoListViewModel() -> DefaultTodoListViewModel {
-        return DefaultTodoListViewModel(useCase: makeTodoListUseCase())
+    private func makeTodoListViewModel(targetState: State) -> DefaultContentListViewModel {
+        return DefaultContentListViewModel(useCase: makeTodoListUseCase(), targetState: targetState)
     }
     
     private func makeTodoEditViewModel(item: TodoModel?) -> DefaultTodoEditViewModel {
@@ -45,17 +45,29 @@ final class TodoSceneDIContainer {
 }
 
 extension TodoSceneDIContainer: TodoListFlowCoordinatorDependencies {
+    func makePageViewController(coordinator: MainListViewDependencies) -> PageViewController {
+        return PageViewController(viewControllers: [
+            ContentListViewController(
+                viewModel: makeTodoListViewModel(targetState: .todo),
+                coordinator: coordinator
+            ),
+            ContentListViewController(
+                viewModel: makeTodoListViewModel(targetState: .doing),
+                coordinator: coordinator
+            ),
+            ContentListViewController(
+                viewModel: makeTodoListViewModel(targetState: .done),
+                coordinator: coordinator
+            ),
+        ])
+    }
+    
     func makeTodoMoveViewController(item: TodoModel,
                                     coordinator: TodoMoveViewControllerDependencies) -> TodoMoveViewController {
         return TodoMoveViewController(viewModel: makeTodoMoveViewModel(item: item),
                                       coordinator: coordinator)
     }
     
-    func makeTodoListViewController(coordinator: TodoListViewControllerDependencies) -> TodoListViewController {
-        return TodoListViewController(viewModel: makeTodoListViewModel(),
-                                      coordinator: coordinator)
-    }
-
     func makeTodoEditViewController(item: TodoModel?,
                                     coordinator: TodoEditViewControllerDependencies) -> TodoEditViewController {
         return TodoEditViewController(viewModel: makeTodoEditViewModel(item: item),
