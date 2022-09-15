@@ -10,13 +10,6 @@ import RxSwift
 import RxCocoa
 
 final class TodoListViewController: UIViewController {
-    private enum Constant {
-        static let navigationBarTitle = "Project Manager"
-    }
-    
-    private let plusButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
-    private let historyButton = UIBarButtonItem()
-    
     private let mainView = TodoListView()
     private let viewModel: TodoListViewModel
     private weak var coordinator: MainListViewDependencies?
@@ -26,7 +19,6 @@ final class TodoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        configureNavigationBar()
         bind()
     }
     
@@ -48,13 +40,6 @@ extension TodoListViewController {
         mainView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-    }
-    
-    private func configureNavigationBar() {
-        title = Constant.navigationBarTitle
-        navigationItem.rightBarButtonItem = plusButton
-        navigationItem.leftBarButtonItem = historyButton
-        historyButton.title = "History"
     }
 }
 
@@ -78,17 +63,6 @@ extension TodoListViewController {
             .disposed(by: bag)
         
         //MARK: - Event
-        plusButton.rx.tap
-            .bind { [weak self] in
-                self?.coordinator?.presentEditViewController(item: nil)
-            }.disposed(by: bag)
-        
-        historyButton.rx.tap
-            .withUnretained(self)
-            .bind { (self, _) in
-                self.coordinator?.popoverHistoryViewController(button: self.historyButton)
-            }.disposed(by: bag)
-        
         mainView.todo.tableView.rx.listLongPress(TodoCellContent.self)
             .bind { [weak self] (cell, item) in
                 guard let item = self?.viewModel.cellSelected(id: item.id) else { return }
