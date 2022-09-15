@@ -9,9 +9,9 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-final class TodoListViewController: UIViewController {
-    private let mainView = TodoListView()
-    private let viewModel: TodoListViewModel
+final class ContentListViewController: UIViewController {
+    private let mainView = ContentListView()
+    private let viewModel: ContentListViewModel
     private weak var coordinator: MainListViewDependencies?
     
     private let bag = DisposeBag()
@@ -22,7 +22,7 @@ final class TodoListViewController: UIViewController {
         bind()
     }
     
-    init(viewModel: TodoListViewModel, coordinator: MainListViewDependencies?) {
+    init(viewModel: ContentListViewModel, coordinator: MainListViewDependencies?) {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
@@ -34,7 +34,7 @@ final class TodoListViewController: UIViewController {
 }
 
 //MARK: - View Setting
-extension TodoListViewController {
+extension ContentListViewController {
     private func configureView() {
         self.view.addSubview(mainView)
         mainView.snp.makeConstraints { make in
@@ -44,13 +44,11 @@ extension TodoListViewController {
 }
 
 //MARK: - ViewModel Bind
-extension TodoListViewController {
+extension ContentListViewController {
     private func bind() {
-        
-        //MARK: - TodoList
-        viewModel.todoList
+        viewModel.contentList
             .bind(
-                to: mainView.todo.tableView.rx.items(
+                to: mainView.list.tableView.rx.items(
                     cellIdentifier: TodoListCell.identifier,
                     cellType: TodoListCell.self
                 )
@@ -58,25 +56,29 @@ extension TodoListViewController {
                 cell.setContent(item: item)
             }.disposed(by: bag)
         
-        viewModel.todoListCount
-            .drive(mainView.todo.headerView.rx.countText)
+        viewModel.listTitle
+            .drive(mainView.list.headerView.rx.titleText)
+            .disposed(by: bag)
+        
+        viewModel.contentCount
+            .drive(mainView.list.headerView.rx.countText)
             .disposed(by: bag)
         
         //MARK: - Event
-        mainView.todo.tableView.rx.listLongPress(TodoCellContent.self)
+        mainView.list.tableView.rx.listLongPress(TodoCellContent.self)
             .bind { [weak self] (cell, item) in
                 guard let item = self?.viewModel.cellSelected(id: item.id) else { return }
                 self?.coordinator?.popoverMoveViewController(cell: cell, item: item)
             }.disposed(by: bag)
         
-        mainView.todo.tableView.rx.listItemSelected(TodoCellContent.self)
+        mainView.list.tableView.rx.listItemSelected(TodoCellContent.self)
             .bind { [weak self] (indexPath, item) in
-                self?.mainView.todo.tableView.deselectRow(at: indexPath, animated: true)
+                self?.mainView.list.tableView.deselectRow(at: indexPath, animated: true)
                 let item = self?.viewModel.cellSelected(id: item.id)
                 self?.coordinator?.presentEditViewController(item: item)
             }.disposed(by: bag)
         
-        mainView.todo.tableView.rx.modelDeleted(TodoCellContent.self)
+        mainView.list.tableView.rx.modelDeleted(TodoCellContent.self)
             .bind { [weak self] item in
                 self?.viewModel.cellDeleteButtonDidTap(item: item)
             }.disposed(by: bag)

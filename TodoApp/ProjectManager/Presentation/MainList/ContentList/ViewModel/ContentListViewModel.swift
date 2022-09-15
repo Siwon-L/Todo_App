@@ -1,32 +1,34 @@
 //
-//  DoingListViewModel.swift
+//  TodoListViewModel.swift
 //  ProjectManager
 //
-//  Created by 이시원 on 2022/09/14.
+//  Created by 이시원 on 2022/07/07.
 //
 
 import Foundation
 import RxSwift
 import RxCocoa
 
-protocol DoingListViewModelInput {
+protocol ContentListViewModelInput {
     func cellSelected(id: UUID) -> TodoModel?
     func cellDeleteButtonDidTap(item: TodoCellContent)
 }
 
-protocol DoingListViewModelOutput {
-    var doingList: Observable<[TodoCellContent]> { get }
-    var doingListCount: Driver<String> { get }
+protocol ContentListViewModelOutput {
+    var contentList: Observable<[TodoCellContent]> { get }
+    var listTitle: Driver<String> { get }
+    var contentCount: Driver<String> { get }
     var errorMessage: Observable<String> { get }
 }
 
-protocol DoingListViewModel: DoingListViewModelInput, DoingListViewModelOutput {}
+protocol ContentListViewModel: ContentListViewModelInput, ContentListViewModelOutput {}
 
-final class DefaultDoingListViewModel {
+final class DefaultContentListViewModel {
     private let useCase: TodoListUseCase
-    
-    init(useCase: TodoListUseCase) {
+    private let state: State
+    init(useCase: TodoListUseCase, targetState: State) {
         self.useCase = useCase
+        self.state = targetState
     }
     
     private let dateFormatter: DateFormatter = {
@@ -43,22 +45,33 @@ final class DefaultDoingListViewModel {
     }
 }
 
-extension DefaultDoingListViewModel: DoingListViewModel {
+extension DefaultContentListViewModel: ContentListViewModel {
     //MARK: - Output
-    var doingList: Observable<[TodoCellContent]> {
+    var contentList: Observable<[TodoCellContent]> {
         useCase
             .readItems()
-            .map {
-                $0.filter { $0.state == .doing }
+            .map { [weak self] in
+                $0.filter { $0.state == self?.state }
             }
             .distinctUntilChanged()
             .compactMap { [weak self] in
                 self?.toTodoCellContents(todoModels: $0)
             }
     }
+    
+    var listTitle: Driver<String> {
+        switch state {
+        case .todo:
+            return .just("TODO").asDriver()
+        case .doing:
+            return .just("DOING").asDriver()
+        case .done:
+            return .just("DONE").asDriver()
+        }
+    }
 
-    var doingListCount: Driver<String> {
-        doingList
+    var contentCount: Driver<String> {
+        contentList
             .map { "\($0.count)" }
             .asDriver(onErrorJustReturn: "0")
     }

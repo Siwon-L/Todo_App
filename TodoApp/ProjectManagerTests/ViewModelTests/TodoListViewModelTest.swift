@@ -10,7 +10,7 @@ import RxSwift
 @testable import ProjectManager
 
 class TodoListViewModelTest: XCTestCase {
-    var viewModel: TodoListViewModel!
+    var viewModel: ContentListViewModel!
     var useCase: MockUseCase!
     let bag = DisposeBag()
     let dummyData: [TodoModel] = [.init(title: "todo", body: "todo", state: .todo),
@@ -20,7 +20,7 @@ class TodoListViewModelTest: XCTestCase {
 
     override func setUpWithError() throws {
         useCase = .init()
-        viewModel = DefaultTodoListViewModel(useCase: useCase)
+        viewModel = DefaultContentListViewModel(useCase: useCase)
     }
 
     override func tearDownWithError() throws {
@@ -33,7 +33,7 @@ class TodoListViewModelTest: XCTestCase {
         useCase.todoList.onNext(dummyData)
         
         // when
-        viewModel.todoListCount
+        viewModel.contentCount
             .drive {
                 // then
                 XCTAssertEqual($0, "1")
@@ -45,7 +45,7 @@ class TodoListViewModelTest: XCTestCase {
         useCase.todoList.onNext(dummyData)
         
         // when
-        viewModel.todoListCount
+        viewModel.contentCount
             .drive {
                 // then
                 XCTAssertNotEqual($0, "2")

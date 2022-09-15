@@ -1,20 +1,21 @@
 //
-//  DoneListView.swift
+//  TodoListView.swift
 //  ProjectManager
 //
-//  Created by 이시원 on 2022/09/13.
+//  Created by 이시원 on 2022/07/05.
 //
 
 import UIKit
 import SnapKit
 
-final class DoneListView: UIView {
-    let done = TodoListTableView(title: "DONE")
+final class ContentListView: UIView {
+    let list = TodoListTableView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLayout()
         self.backgroundColor = .systemBackground
+        
     }
     
     required init?(coder: NSCoder) {
@@ -22,13 +23,9 @@ final class DoneListView: UIView {
     }
     
     private func configureLayout() {
-        self.addSubview(done)
-        done.snp.makeConstraints { make in
+        self.addSubview(list)
+        list.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    }
-    
-    func tableViewdeselectRow(indexPath: IndexPath) {
-        done.tableView.deselectRow(at: indexPath, animated: true)
     }
 }
