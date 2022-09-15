@@ -9,8 +9,14 @@ import UIKit
 
 import SnapKit
 
-class PageViewController: UIViewController {
+final class PageViewController: UIViewController {
+    private enum Constant {
+        static let navigationBarTitle = "Project Manager"
+    }
+    
     private let viewControllers: [UIViewController]
+    private let plusButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
+    private let historyButton = UIBarButtonItem()
     
     private lazy var pageViewController: UIPageViewController = {
         let vc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -30,7 +36,16 @@ class PageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pageViewController.dataSource = self
+        pageViewController.delegate = self
         configureUI()
+        configureNavigationBar()
+    }
+    
+    private func configureNavigationBar() {
+        title = Constant.navigationBarTitle
+        navigationItem.rightBarButtonItem = plusButton
+        navigationItem.leftBarButtonItem = historyButton
+        historyButton.title = "History"
     }
 }
 
@@ -53,7 +68,7 @@ extension PageViewController {
     }
 }
 
-extension PageViewController: UIPageViewControllerDataSource {
+extension PageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
@@ -61,7 +76,7 @@ extension PageViewController: UIPageViewControllerDataSource {
         guard let index = viewControllers.firstIndex(of: viewController) else { return nil }
         let previousIndex = index - 1
         if previousIndex < 0 {
-            return nil
+            return viewControllers.last
         }
         return viewControllers[previousIndex]
     }
@@ -71,9 +86,9 @@ extension PageViewController: UIPageViewControllerDataSource {
         viewControllerAfter viewController: UIViewController
     ) -> UIViewController? {
         guard let index = viewControllers.firstIndex(of: viewController) else { return nil }
-        let nextIndex = index - 1
+        let nextIndex = index + 1
         if nextIndex == viewControllers.count {
-            return nil
+            return viewControllers.first
         }
         return viewControllers[nextIndex]
     }
