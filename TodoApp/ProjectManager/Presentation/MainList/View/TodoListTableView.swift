@@ -25,7 +25,7 @@ final class TodoListTableView: UIView {
         return tableView
     }()
     
-    init(title: String) {
+    init(title: String? = nil) {
         headerView = TodoListHeaderView(title: title)
         super.init(frame: .zero)
         configureLayout()

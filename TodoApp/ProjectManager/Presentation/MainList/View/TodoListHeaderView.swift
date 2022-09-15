@@ -16,7 +16,7 @@ final class TodoListHeaderView: UIView {
         return stackView
     }()
     
-    private lazy var titleLabel: UILabel = {
+    fileprivate lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .largeTitle)
         
@@ -34,7 +34,7 @@ final class TodoListHeaderView: UIView {
         return label
     }()
     
-    init(title: String) {
+    init(title: String?) {
         super.init(frame: .zero)
         configureLayout()
         titleLabel.text = title
@@ -62,5 +62,8 @@ final class TodoListHeaderView: UIView {
 extension Reactive where Base == TodoListHeaderView {
     var countText: Binder<String?> {
         return base.countLabel.rx.text
+    }
+    var titleText: Binder<String?> {
+        return base.titleLabel.rx.text
     }
 }
