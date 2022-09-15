@@ -15,8 +15,8 @@
 		9B2D9BD828783D5F0062C81A /* DefaultTodoListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D9BD728783D5F0062C81A /* DefaultTodoListRepository.swift */; };
 		9B2D9BDC28783E660062C81A /* TodoListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D9BDB28783E660062C81A /* TodoListRepository.swift */; };
 		9B2D9BDE28783F580062C81A /* TodoListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D9BDD28783F580062C81A /* TodoListUseCase.swift */; };
-		9B2D9BE128787CCD0062C81A /* TodoSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D9BE028787CCD0062C81A /* TodoSceneDIContainer.swift */; };
-		9B2D9BE328787F1D0062C81A /* TodoListFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D9BE228787F1D0062C81A /* TodoListFlowCoordinator.swift */; };
+		9B2D9BE128787CCD0062C81A /* MainSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D9BE028787CCD0062C81A /* MainSceneDIContainer.swift */; };
+		9B2D9BE328787F1D0062C81A /* MainFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D9BE228787F1D0062C81A /* MainFlowCoordinator.swift */; };
 		9B2D9BEB28788D520062C81A /* TodoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2D9BEA28788D520062C81A /* TodoEditViewModel.swift */; };
 		9B45247628884DC50011D5D1 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9B45247528884DC50011D5D1 /* FirebaseDatabase */; };
 		9B45247828884E000011D5D1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B45247728884E000011D5D1 /* GoogleService-Info.plist */; };
@@ -85,8 +85,8 @@
 		9B2D9BD728783D5F0062C81A /* DefaultTodoListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTodoListRepository.swift; sourceTree = "<group>"; };
 		9B2D9BDB28783E660062C81A /* TodoListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListRepository.swift; sourceTree = "<group>"; };
 		9B2D9BDD28783F580062C81A /* TodoListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListUseCase.swift; sourceTree = "<group>"; };
-		9B2D9BE028787CCD0062C81A /* TodoSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSceneDIContainer.swift; sourceTree = "<group>"; };
-		9B2D9BE228787F1D0062C81A /* TodoListFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListFlowCoordinator.swift; sourceTree = "<group>"; };
+		9B2D9BE028787CCD0062C81A /* MainSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneDIContainer.swift; sourceTree = "<group>"; };
+		9B2D9BE228787F1D0062C81A /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
 		9B2D9BEA28788D520062C81A /* TodoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEditViewModel.swift; sourceTree = "<group>"; };
 		9B45247728884E000011D5D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9B4524792888577F0011D5D1 /* FirebaseTodoListStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTodoListStorage.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		9B2D9BDF28787BD40062C81A /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
-				9B2D9BE028787CCD0062C81A /* TodoSceneDIContainer.swift */,
+				9B2D9BE028787CCD0062C81A /* MainSceneDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -371,7 +371,7 @@
 		9BA95C6C2876D76F00927C63 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				9B2D9BE228787F1D0062C81A /* TodoListFlowCoordinator.swift */,
+				9B2D9BE228787F1D0062C81A /* MainFlowCoordinator.swift */,
 				9BBD719028D0BFAC006EF5BE /* MainList */,
 				9B2D9BE728788BC00062C81A /* TodoEdit */,
 				9B7A8CFA28800E18009938C8 /* TodoMove */,
@@ -685,7 +685,7 @@
 				9B45247A2888577F0011D5D1 /* FirebaseTodoListStorage.swift in Sources */,
 				9BB9AF23288E58340068030B /* HistoryCell.swift in Sources */,
 				9BA4EC07288EAA940060536E /* HistoryRepository.swift in Sources */,
-				9B2D9BE128787CCD0062C81A /* TodoSceneDIContainer.swift in Sources */,
+				9B2D9BE128787CCD0062C81A /* MainSceneDIContainer.swift in Sources */,
 				9B84B0482892A71600C26ECC /* Collection+Subscript.swift in Sources */,
 				9B15AF30287EECEE002F0D01 /* TodoMoveViewController.swift in Sources */,
 				9BF85574288657AE0098441C /* TodoEntity+Realm.swift in Sources */,
@@ -694,7 +694,7 @@
 				C7431F0625F51E1D0094C4CF /* AppDelegate.swift in Sources */,
 				9B2D9BEB28788D520062C81A /* TodoEditViewModel.swift in Sources */,
 				9BDA0190287464E800C8F7C8 /* ContentListView.swift in Sources */,
-				9B2D9BE328787F1D0062C81A /* TodoListFlowCoordinator.swift in Sources */,
+				9B2D9BE328787F1D0062C81A /* MainFlowCoordinator.swift in Sources */,
 				9BCEA9552875E7F500258589 /* TodoModel.swift in Sources */,
 				9BA4EBFF288E890B0060536E /* HistoryViewModel.swift in Sources */,
 				9B7A5F7E28D0A3DD005E3220 /* PageViewController.swift in Sources */,

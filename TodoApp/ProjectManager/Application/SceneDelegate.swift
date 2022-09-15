@@ -8,8 +8,8 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    private let todoSceneDIContainer = TodoSceneDIContainer()
-    private var todoListFlowCoordinator: TodoListFlowCoordinator?
+    private let todoSceneDIContainer = MainSceneDIContainer()
+    private var todoListFlowCoordinator: MainFlowCoordinator?
     
     var window: UIWindow?
     
@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
         
         window?.rootViewController = navigationController
-        todoListFlowCoordinator = TodoListFlowCoordinator(navigationController: navigationController, dependencies: todoSceneDIContainer)
+        todoListFlowCoordinator = MainFlowCoordinator(navigationController: navigationController, dependencies: todoSceneDIContainer)
         
         todoListFlowCoordinator?.start()
         window?.makeKeyAndVisible()

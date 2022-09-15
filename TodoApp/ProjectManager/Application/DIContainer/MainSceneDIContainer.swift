@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class TodoSceneDIContainer {
+final class MainSceneDIContainer {
     private let todoListStorage = RealmTodoListStorage()
     private let historyStorage = RealmHistoryStorage()
     private let backUpStorage = FirebaseTodoListStorage()
@@ -44,7 +44,7 @@ final class TodoSceneDIContainer {
     }
 }
 
-extension TodoSceneDIContainer: TodoListFlowCoordinatorDependencies {
+extension MainSceneDIContainer: MainFlowCoordinatorDependencies {
     func makePageViewController(coordinator: MainListViewDependencies) -> PageViewController {
         return PageViewController(viewControllers: [
             ContentListViewController(

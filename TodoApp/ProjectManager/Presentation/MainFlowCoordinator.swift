@@ -1,5 +1,5 @@
 //
-//  TodoListFlowCoordinator.swift
+//  MainFlowCoordinator.swift
 //  ProjectManager
 //
 //  Created by 이시원 on 2022/07/09.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TodoListFlowCoordinatorDependencies {
+protocol MainFlowCoordinatorDependencies {
     func makePageViewController(coordinator: MainListViewDependencies) -> PageViewController
     func makeTodoEditViewController(item: TodoModel?,
                                     coordinator: TodoEditViewControllerDependencies) -> TodoEditViewController
@@ -16,21 +16,21 @@ protocol TodoListFlowCoordinatorDependencies {
     func makeHistoryViewController(coordinator: HistoryViewControllerDependencies) -> HistoryViewController
 }
 
-final class TodoListFlowCoordinator {
+final class MainFlowCoordinator {
     private weak var navigationController: UINavigationController?
-    private let dependencies: TodoListFlowCoordinatorDependencies
+    private let dependencies: MainFlowCoordinatorDependencies
     private weak var pageViewController: PageViewController?
     private weak var todoEditViewController: TodoEditViewController?
     private weak var todoMoveViewController: TodoMoveViewController?
     private weak var historyViewController: HistoryViewController?
     
-    init(navigationController: UINavigationController, dependencies: TodoListFlowCoordinatorDependencies) {
+    init(navigationController: UINavigationController, dependencies: MainFlowCoordinatorDependencies) {
         self.navigationController = navigationController
         self.dependencies = dependencies
     }
 }
 
-extension TodoListFlowCoordinator {
+extension MainFlowCoordinator {
     func start() {
         let viewController = dependencies.makePageViewController(coordinator: self)
         
@@ -39,7 +39,7 @@ extension TodoListFlowCoordinator {
     }
 }
 
-extension TodoListFlowCoordinator: MainListViewDependencies {
+extension MainFlowCoordinator: MainListViewDependencies {
     func presentEditViewController(item: TodoModel?) {
         let viewController = dependencies.makeTodoEditViewController(item: item, coordinator: self)
         viewController.modalPresentationStyle = .formSheet
@@ -76,19 +76,19 @@ extension TodoListFlowCoordinator: MainListViewDependencies {
     }
 }
 
-extension TodoListFlowCoordinator: TodoEditViewControllerDependencies {
+extension MainFlowCoordinator: TodoEditViewControllerDependencies {
     func dismissEditViewController() {
         todoEditViewController?.dismiss(animated: true)
     }
 }
 
-extension TodoListFlowCoordinator: TodoMoveViewControllerDependencies {
+extension MainFlowCoordinator: TodoMoveViewControllerDependencies {
     func dismissMoveViewController() {
         todoMoveViewController?.dismiss(animated: true)
     }
 }
 
-extension TodoListFlowCoordinator: HistoryViewControllerDependencies {
+extension MainFlowCoordinator: HistoryViewControllerDependencies {
     func dismissHistoryViewController() {
         historyViewController?.dismiss(animated: true)
     }
