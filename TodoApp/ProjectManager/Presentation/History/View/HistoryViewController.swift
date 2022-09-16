@@ -10,7 +10,7 @@ import SnapKit
 import RxSwift
 
 protocol HistoryViewControllerDependencies: AnyObject {
-    func dismissHistoryViewController()
+    func popHistoryViewController()
 }
 
 final class HistoryViewController: UIViewController {
@@ -18,13 +18,13 @@ final class HistoryViewController: UIViewController {
     private let viewModel: HistoryViewModel
     private weak var coordinator: HistoryViewControllerDependencies?
     private let bag = DisposeBag()
-
+    
     private let historyTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(HistoryCell.self, forCellReuseIdentifier: HistoryCell.identifier)
         return tableView
     }()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -45,10 +45,10 @@ final class HistoryViewController: UIViewController {
 //MARK: - View Setting
 extension HistoryViewController {
     private func configureView() {
+        view.backgroundColor = .systemBackground
         self.view.addSubview(historyTableView)
         historyTableView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(24)
-            make.bottom.leading.trailing.equalToSuperview().inset(8)
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }
@@ -57,8 +57,12 @@ extension HistoryViewController {
 extension HistoryViewController {
     private func bind() {
         viewModel.historyList
-            .bind(to: historyTableView.rx.items(cellIdentifier: HistoryCell.identifier,
-                                                cellType: HistoryCell.self)) { row, item, cell in
+            .bind(
+                to: historyTableView.rx.items(
+                    cellIdentifier: HistoryCell.identifier,
+                    cellType: HistoryCell.self
+                )
+            ) { row, item, cell in
                 cell.setContent(item: item)
             }.disposed(by: bag)
     }

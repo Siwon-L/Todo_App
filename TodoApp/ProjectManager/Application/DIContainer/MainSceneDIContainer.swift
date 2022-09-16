@@ -13,7 +13,11 @@ final class MainSceneDIContainer {
     private let backUpStorage = FirebaseTodoListStorage()
     private let userStateStorage = UserDefaults()
 
-    private func makeTodoListViewModel(targetState: State) -> DefaultContentListViewModel {
+    private func makePageViewModel() -> DefaultPageViewModel {
+        return DefaultPageViewModel(useCase: makeTodoListUseCase())
+    }
+    
+    private func makeContentListViewModel(targetState: State) -> DefaultContentListViewModel {
         return DefaultContentListViewModel(useCase: makeTodoListUseCase(), targetState: targetState)
     }
     
@@ -45,21 +49,18 @@ final class MainSceneDIContainer {
 }
 
 extension MainSceneDIContainer: MainFlowCoordinatorDependencies {
-    func makePageViewController(coordinator: MainListViewDependencies) -> PageViewController {
-        return PageViewController(viewControllers: [
-            ContentListViewController(
-                viewModel: makeTodoListViewModel(targetState: .todo),
-                coordinator: coordinator
-            ),
-            ContentListViewController(
-                viewModel: makeTodoListViewModel(targetState: .doing),
-                coordinator: coordinator
-            ),
-            ContentListViewController(
-                viewModel: makeTodoListViewModel(targetState: .done),
-                coordinator: coordinator
-            ),
-        ])
+    func makePageViewController(coordinator: PageViewDependencies, viewControllers: [ContentListViewController]) -> PageViewController {
+        return PageViewController(viewControllers: viewControllers,
+                                  viewModel: makePageViewModel(),
+                                  coordinator: coordinator)
+    }
+    
+    func makeContentViewControllers(coordinator: ContentListViewDependencies) -> [ContentListViewController] {
+        return [
+            ContentListViewController(viewModel: makeContentListViewModel(targetState: .todo), coordinator: coordinator),
+            ContentListViewController(viewModel: makeContentListViewModel(targetState: .doing), coordinator: coordinator),
+            ContentListViewController(viewModel: makeContentListViewModel(targetState: .done), coordinator: coordinator)
+        ]
     }
     
     func makeTodoMoveViewController(item: TodoModel,

@@ -8,7 +8,8 @@
 import UIKit
 
 protocol MainFlowCoordinatorDependencies {
-    func makePageViewController(coordinator: MainListViewDependencies) -> PageViewController
+    func makePageViewController(coordinator: PageViewDependencies, viewControllers: [ContentListViewController]) -> PageViewController
+    func makeContentViewControllers(coordinator: ContentListViewDependencies) -> [ContentListViewController]
     func makeTodoEditViewController(item: TodoModel?,
                                     coordinator: TodoEditViewControllerDependencies) -> TodoEditViewController
     func makeTodoMoveViewController(item: TodoModel,
@@ -32,14 +33,30 @@ final class MainFlowCoordinator {
 
 extension MainFlowCoordinator {
     func start() {
-        let viewController = dependencies.makePageViewController(coordinator: self)
-        
+        let viewController = dependencies.makePageViewController(
+            coordinator: self,
+            viewControllers: dependencies.makeContentViewControllers(
+                coordinator: self
+            )
+        )
         navigationController?.pushViewController(viewController, animated: true)
         pageViewController = viewController
     }
 }
 
-extension MainFlowCoordinator: MainListViewDependencies {
+extension MainFlowCoordinator: PageViewDependencies {
+    func presentPlusViewController() {
+        presentEditViewController(item: nil)
+    }
+    
+    func pushHistoryViewController(button: UIBarButtonItem) {
+        let viewController = dependencies.makeHistoryViewController(coordinator: self)
+        navigationController?.pushViewController(viewController, animated: true)
+        historyViewController = viewController
+    }
+}
+
+extension MainFlowCoordinator: ContentListViewDependencies {
     func presentEditViewController(item: TodoModel?) {
         let viewController = dependencies.makeTodoEditViewController(item: item, coordinator: self)
         viewController.modalPresentationStyle = .formSheet
@@ -64,16 +81,6 @@ extension MainFlowCoordinator: MainListViewDependencies {
         alertController.addAction(.init(title: "확인", style: .default))
         pageViewController?.present(alertController, animated: true, completion: nil)
     }
-    
-    func popoverHistoryViewController(button: UIBarButtonItem) {
-        let viewController = dependencies.makeHistoryViewController(coordinator: self)
-        viewController.modalPresentationStyle = .popover
-        viewController.preferredContentSize = CGSize(width: 500, height: 500)
-        viewController.popoverPresentationController?.barButtonItem = button
-        pageViewController?.present(viewController, animated: true)
-        
-        historyViewController = viewController
-    }
 }
 
 extension MainFlowCoordinator: TodoEditViewControllerDependencies {
@@ -89,7 +96,7 @@ extension MainFlowCoordinator: TodoMoveViewControllerDependencies {
 }
 
 extension MainFlowCoordinator: HistoryViewControllerDependencies {
-    func dismissHistoryViewController() {
-        historyViewController?.dismiss(animated: true)
+    func popHistoryViewController() {
+        navigationController?.popViewController(animated: true)
     }
 }
