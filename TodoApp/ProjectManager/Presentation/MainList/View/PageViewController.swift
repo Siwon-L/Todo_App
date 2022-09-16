@@ -8,15 +8,24 @@
 import UIKit
 
 import SnapKit
+import RxSwift
+
+protocol PageViewDependencies: AnyObject {
+    func presentPlusViewController()
+    func pushHistoryViewController(button: UIBarButtonItem)
+    func showErrorAlert(message: String)
+}
 
 final class PageViewController: UIViewController {
     private enum Constant {
         static let navigationBarTitle = "Project Manager"
     }
-    
+    private let viewModel: PageViewModel
+    private weak var coordinator: PageViewDependencies?
     private let viewControllers: [UIViewController]
     private let plusButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
     private let historyButton = UIBarButtonItem()
+    private let bag = DisposeBag()
     
     private lazy var pageViewController: UIPageViewController = {
         let vc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -24,8 +33,14 @@ final class PageViewController: UIViewController {
         return vc
     }()
     
-    init(viewControllers: [UIViewController]) {
+    init(
+        viewControllers: [UIViewController],
+        viewModel: PageViewModel,
+        coordinator: PageViewDependencies
+    ) {
         self.viewControllers = viewControllers
+        self.viewModel = viewModel
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,6 +54,7 @@ final class PageViewController: UIViewController {
         pageViewController.delegate = self
         configureUI()
         configureNavigationBar()
+        bind()
     }
     
     private func configureNavigationBar() {
@@ -46,6 +62,27 @@ final class PageViewController: UIViewController {
         navigationItem.rightBarButtonItem = plusButton
         navigationItem.leftBarButtonItem = historyButton
         historyButton.title = "History"
+    }
+}
+
+extension PageViewController {
+    private func bind() {
+        //MARK: - Error Handling
+        viewModel.errorMessage
+            .bind { [weak self] message in
+                self?.coordinator?.showErrorAlert(message: message)
+            }.disposed(by: bag)
+        
+        plusButton.rx.tap
+            .bind { [weak self] in
+                self?.coordinator?.presentPlusViewController()
+            }.disposed(by: bag)
+        
+        historyButton.rx.tap
+            .bind { [weak self] in
+                guard let self = self else { return }
+                self.coordinator?.pushHistoryViewController(button: self.historyButton)
+            }.disposed(by: bag)
     }
 }
 
