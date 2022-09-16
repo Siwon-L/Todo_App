@@ -48,6 +48,7 @@
 		9BB9AF23288E58340068030B /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9AF22288E58340068030B /* HistoryCell.swift */; };
 		9BCEA9552875E7F500258589 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCEA9542875E7F500258589 /* TodoModel.swift */; };
 		9BCEA95728768C3C00258589 /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCEA95628768C3C00258589 /* TodoListCell.swift */; };
+		9BD2702828D48B6400DACF36 /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD2702728D48B6400DACF36 /* PageViewModel.swift */; };
 		9BD40D4D289120C100939532 /* TodoEditViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40D4C289120C100939532 /* TodoEditViewModelTest.swift */; };
 		9BD40D4F289152FF00939532 /* TodoMoveViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40D4E289152FF00939532 /* TodoMoveViewModelTest.swift */; };
 		9BD40D512891618E00939532 /* HistoryViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40D502891618E00939532 /* HistoryViewModelTest.swift */; };
@@ -118,6 +119,7 @@
 		9BB9AF22288E58340068030B /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		9BCEA9542875E7F500258589 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		9BCEA95628768C3C00258589 /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
+		9BD2702728D48B6400DACF36 /* PageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewModel.swift; sourceTree = "<group>"; };
 		9BD40D4C289120C100939532 /* TodoEditViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEditViewModelTest.swift; sourceTree = "<group>"; };
 		9BD40D4E289152FF00939532 /* TodoMoveViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoMoveViewModelTest.swift; sourceTree = "<group>"; };
 		9BD40D502891618E00939532 /* HistoryViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModelTest.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 		9BBD719028D0BFAC006EF5BE /* MainList */ = {
 			isa = PBXGroup;
 			children = (
+				9BD2702628D48B5600DACF36 /* ViewModel */,
 				9BBD719228D0C0B8006EF5BE /* View */,
 				9B2D9BE428788B6B0062C81A /* ContentList */,
 			);
@@ -484,6 +487,14 @@
 				9BCEA95628768C3C00258589 /* TodoListCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9BD2702628D48B5600DACF36 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9BD2702728D48B6400DACF36 /* PageViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		9BF4A9D22893854B0098DC1B /* UseCaseTests */ = {
@@ -689,6 +700,7 @@
 				9B2D9BE328787F1D0062C81A /* MainFlowCoordinator.swift in Sources */,
 				9BCEA9552875E7F500258589 /* TodoModel.swift in Sources */,
 				9BA4EBFF288E890B0060536E /* HistoryViewModel.swift in Sources */,
+				9BD2702828D48B6400DACF36 /* PageViewModel.swift in Sources */,
 				9B7A5F7E28D0A3DD005E3220 /* PageViewController.swift in Sources */,
 				9BA4EC09288EABB40060536E /* DefaultHistoryRepository.swift in Sources */,
 				9BA4EC01288EA0260060536E /* History.swift in Sources */,
