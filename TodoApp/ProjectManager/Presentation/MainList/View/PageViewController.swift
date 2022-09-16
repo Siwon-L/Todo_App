@@ -61,6 +61,7 @@ final class PageViewController: UIViewController {
         title = Constant.navigationBarTitle
         navigationItem.rightBarButtonItem = plusButton
         navigationItem.leftBarButtonItem = historyButton
+        navigationItem.backButtonTitle = "Back"
         historyButton.title = "History"
     }
 }

@@ -45,6 +45,7 @@ final class HistoryViewController: UIViewController {
 //MARK: - View Setting
 extension HistoryViewController {
     private func configureView() {
+        title = "History"
         view.backgroundColor = .systemBackground
         self.view.addSubview(historyTableView)
         historyTableView.snp.makeConstraints { make in
