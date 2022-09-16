@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TodoCellContent {
+struct ContentCellItem {
     let title: String?
     let body: String?
     let deadlineAt: String

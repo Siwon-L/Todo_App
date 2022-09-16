@@ -72,20 +72,20 @@ extension ContentListViewController {
             .disposed(by: bag)
         
         //MARK: - Event
-        mainView.list.tableView.rx.listLongPress(TodoCellContent.self)
+        mainView.list.tableView.rx.listLongPress(ContentCellItem.self)
             .bind { [weak self] (cell, item) in
                 guard let item = self?.viewModel.cellSelected(id: item.id) else { return }
                 self?.coordinator?.popoverMoveViewController(cell: cell, item: item)
             }.disposed(by: bag)
         
-        mainView.list.tableView.rx.listItemSelected(TodoCellContent.self)
+        mainView.list.tableView.rx.listItemSelected(ContentCellItem.self)
             .bind { [weak self] (indexPath, item) in
                 self?.mainView.list.tableView.deselectRow(at: indexPath, animated: true)
                 let item = self?.viewModel.cellSelected(id: item.id)
                 self?.coordinator?.presentEditViewController(item: item)
             }.disposed(by: bag)
         
-        mainView.list.tableView.rx.modelDeleted(TodoCellContent.self)
+        mainView.list.tableView.rx.modelDeleted(ContentCellItem.self)
             .bind { [weak self] item in
                 self?.viewModel.cellDeleteButtonDidTap(item: item)
             }.disposed(by: bag)

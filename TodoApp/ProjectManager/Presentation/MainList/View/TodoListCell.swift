@@ -58,7 +58,7 @@ final class TodoListCell: UITableViewCell, CellIdentifiable {
 }
 
 extension TodoListCell {
-    func setContent(item: TodoCellContent) {
+    func setContent(item: ContentCellItem) {
         titleLabel.text = item.title
         bodyLabel.text = item.body
         deadlineLabel.text = item.deadlineAt

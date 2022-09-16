@@ -11,11 +11,11 @@ import RxCocoa
 
 protocol ContentListViewModelInput {
     func cellSelected(id: UUID) -> TodoModel?
-    func cellDeleteButtonDidTap(item: TodoCellContent)
+    func cellDeleteButtonDidTap(item: ContentCellItem)
 }
 
 protocol ContentListViewModelOutput {
-    var contentList: Observable<[TodoCellContent]> { get }
+    var contentList: Observable<[ContentCellItem]> { get }
     var listTitle: Driver<String> { get }
     var contentCount: Driver<String> { get }
     var errorMessage: Observable<String> { get }
@@ -37,9 +37,9 @@ final class DefaultContentListViewModel {
         return dateFormatter
     }()
     
-    private func toTodoCellContents(todoModels: [TodoModel]) -> [TodoCellContent] {
+    private func toTodoCellContents(todoModels: [TodoModel]) -> [ContentCellItem] {
         todoModels.map { item in
-            TodoCellContent(entity: item,
+            ContentCellItem(entity: item,
                             dateFormatter: dateFormatter)
         }
     }
@@ -47,7 +47,7 @@ final class DefaultContentListViewModel {
 
 extension DefaultContentListViewModel: ContentListViewModel {
     //MARK: - Output
-    var contentList: Observable<[TodoCellContent]> {
+    var contentList: Observable<[ContentCellItem]> {
         useCase
             .readItems()
             .map { [weak self] in
@@ -90,7 +90,7 @@ extension DefaultContentListViewModel: ContentListViewModel {
             .first { $0.id == id }
     }
 
-    func cellDeleteButtonDidTap(item: TodoCellContent) {
+    func cellDeleteButtonDidTap(item: ContentCellItem) {
         useCase.deleteItem(id: item.id)
     }
 }
