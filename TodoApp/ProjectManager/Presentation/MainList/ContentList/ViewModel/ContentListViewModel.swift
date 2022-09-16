@@ -18,7 +18,6 @@ protocol ContentListViewModelOutput {
     var contentList: Observable<[ContentCellItem]> { get }
     var listTitle: Driver<String> { get }
     var contentCount: Driver<String> { get }
-    var errorMessage: Observable<String> { get }
 }
 
 protocol ContentListViewModel: ContentListViewModelInput, ContentListViewModelOutput {}
@@ -74,13 +73,6 @@ extension DefaultContentListViewModel: ContentListViewModel {
         contentList
             .map { "\($0.count)" }
             .asDriver(onErrorJustReturn: "0")
-    }
-    
-    var errorMessage: Observable<String> {
-        useCase.errorObserver
-            .map { error in
-                error.localizedDescription
-            }
     }
     
     //MARK: - Input

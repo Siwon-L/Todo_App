@@ -9,17 +9,16 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-protocol MainListViewDependencies: AnyObject {
+protocol ContentListViewDependencies: AnyObject {
     func presentEditViewController(item: TodoModel?)
     func popoverMoveViewController(cell: UITableViewCell?, item: TodoModel)
-    func popoverHistoryViewController(button: UIBarButtonItem)
     func showErrorAlert(message: String)
 }
 
 final class ContentListViewController: UIViewController {
     private let mainView = ContentListView()
     private let viewModel: ContentListViewModel
-    private weak var coordinator: MainListViewDependencies?
+    private weak var coordinator: ContentListViewDependencies?
     
     private let bag = DisposeBag()
     
@@ -29,7 +28,7 @@ final class ContentListViewController: UIViewController {
         bind()
     }
     
-    init(viewModel: ContentListViewModel, coordinator: MainListViewDependencies?) {
+    init(viewModel: ContentListViewModel, coordinator: ContentListViewDependencies?) {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
@@ -88,12 +87,6 @@ extension ContentListViewController {
         mainView.list.tableView.rx.modelDeleted(ContentCellItem.self)
             .bind { [weak self] item in
                 self?.viewModel.cellDeleteButtonDidTap(item: item)
-            }.disposed(by: bag)
-        
-        //MARK: - Error Handling
-        viewModel.errorMessage
-            .bind { [weak self] message in
-                self?.coordinator?.showErrorAlert(message: message)
             }.disposed(by: bag)
     }
 }
