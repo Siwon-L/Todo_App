@@ -12,10 +12,11 @@ import RxCocoa
 protocol TodoMoveViewModelInput {
     func firstButtonDidTap()
     func secondButtonDidTap()
+    func deleteButonDidTap()
 }
 
 protocol TodoMoveViewModelOutput {
-    var buttonTitle: Observable<(String, String)> { get }
+    var buttonTitle: Observable<[String]> { get }
 }
 
 protocol TodoMoveViewModel: TodoMoveViewModelInput, TodoMoveViewModelOutput {}
@@ -29,14 +30,14 @@ final class DefaultTodoMoveViewModel {
         self.item = item
     }
     
-    private func setButtonTitle(at state: State) -> (String, String) {
+    private func setButtonTitle(at state: State) -> [String] {
         switch state {
         case .todo:
-            return ("Move to DOING", "Move to DONE")
+            return ["Move to DOING", "Move to DONE"]
         case .doing:
-            return ("Move to TODO", "Move to DONE")
+            return ["Move to TODO", "Move to DONE"]
         case .done:
-            return ("Move to TODO", "Move to DOING")
+            return ["Move to TODO", "Move to DOING"]
         }
     }
 }
@@ -44,8 +45,9 @@ final class DefaultTodoMoveViewModel {
 extension DefaultTodoMoveViewModel: TodoMoveViewModel {
     
     //MARK: - Output
-    var buttonTitle: Observable<(String, String)> {
-        let buttonTitle = setButtonTitle(at: item.state)
+    var buttonTitle: Observable<[String]> {
+        var buttonTitle = setButtonTitle(at: item.state)
+        buttonTitle.append("Delete")
         
         return Observable.just(buttonTitle)
     }
@@ -57,5 +59,9 @@ extension DefaultTodoMoveViewModel: TodoMoveViewModel {
     
     func secondButtonDidTap() {
         useCase.secondMoveState(item: item)
+    }
+    
+    func deleteButonDidTap() {
+        useCase.deleteItem(id: item.id)
     }
 }

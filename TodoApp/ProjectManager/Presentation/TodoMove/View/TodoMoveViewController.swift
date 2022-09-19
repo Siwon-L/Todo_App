@@ -13,32 +13,44 @@ protocol TodoMoveViewControllerDependencies: AnyObject {
     func dismissMoveViewController()
 }
 
+enum ArrowDirections {
+    case up
+    case down
+}
+
 final class TodoMoveViewController: UIViewController {
     private let viewModel: TodoMoveViewModel
     private weak var coordinator: TodoMoveViewControllerDependencies?
+    var arrowDirections: ArrowDirections?
     private let bag = DisposeBag()
     
     private let firstButton: UIButton = {
         let button = UIButton()
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
-        button.backgroundColor = .systemBackground
+        button.backgroundColor = .systemGray5
         button.setTitleColor(UIColor.systemBlue, for: .normal)
         return button
     }()
     
     private let secondButton: UIButton = {
         let button = UIButton()
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
-        button.backgroundColor = .systemBackground
+        button.backgroundColor = .systemGray5
         button.setTitleColor(UIColor.systemBlue, for: .normal)
         return button
     }()
     
+    private let deleteButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemGray5
+        button.setTitleColor(UIColor.systemRed, for: .normal)
+        return button
+    }()
+    
     private lazy var buttomStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [firstButton, secondButton])
+        let stackView = UIStackView(arrangedSubviews: [firstButton, secondButton, deleteButton])
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = 1
         stackView.distribution = .fillEqually
+        stackView.backgroundColor = .systemGray4
         return stackView
     }()
     
@@ -65,7 +77,14 @@ extension TodoMoveViewController {
         view.backgroundColor = .systemGray5
         view.addSubview(buttomStackView)
         buttomStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(24)
+            if arrowDirections == .up {
+                make.top.equalToSuperview().inset(12)
+                make.bottom.leading.trailing.equalToSuperview()
+            } else {
+                make.bottom.equalToSuperview().inset(12)
+                make.top.leading.trailing.equalToSuperview()
+            }
+            
         }
     }
 }
@@ -74,9 +93,10 @@ extension TodoMoveViewController {
 extension TodoMoveViewController {
     private func bind() {
         viewModel.buttonTitle
-            .bind { [weak self] (firstTitle, secondTitle) in
-                self?.firstButton.setTitle(firstTitle, for: .normal)
-                self?.secondButton.setTitle(secondTitle, for: .normal)
+            .bind { [weak self] in
+                self?.firstButton.setTitle($0[0], for: .normal)
+                self?.secondButton.setTitle($0[1], for: .normal)
+                self?.deleteButton.setTitle("Delete", for: .normal)
             }.disposed(by: bag)
         
         firstButton.rx.tap
@@ -89,6 +109,12 @@ extension TodoMoveViewController {
             .bind { [weak self] in
                 self?.coordinator?.dismissMoveViewController()
                 self?.viewModel.secondButtonDidTap()
+            }.disposed(by: bag)
+        
+        deleteButton.rx.tap
+            .bind { [weak self] in
+                self?.coordinator?.dismissMoveViewController()
+                self?.viewModel.deleteButonDidTap()
             }.disposed(by: bag)
     }
 }
