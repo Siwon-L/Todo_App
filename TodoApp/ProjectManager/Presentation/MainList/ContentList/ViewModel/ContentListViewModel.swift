@@ -11,7 +11,6 @@ import RxCocoa
 
 protocol ContentListViewModelInput {
     func cellSelected(id: UUID) -> TodoModel?
-    func cellDeleteButtonDidTap(item: ContentCellItem)
 }
 
 protocol ContentListViewModelOutput {
@@ -80,9 +79,5 @@ extension DefaultContentListViewModel: ContentListViewModel {
     func cellSelected(id: UUID) -> TodoModel? {
         return try? useCase.readItems().value()
             .first { $0.id == id }
-    }
-
-    func cellDeleteButtonDidTap(item: ContentCellItem) {
-        useCase.deleteItem(id: item.id)
     }
 }

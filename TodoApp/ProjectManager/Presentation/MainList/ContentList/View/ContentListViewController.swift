@@ -83,10 +83,5 @@ extension ContentListViewController {
                 let item = self?.viewModel.cellSelected(id: item.id)
                 self?.coordinator?.presentEditViewController(item: item)
             }.disposed(by: bag)
-        
-        mainView.list.tableView.rx.modelDeleted(ContentCellItem.self)
-            .bind { [weak self] item in
-                self?.viewModel.cellDeleteButtonDidTap(item: item)
-            }.disposed(by: bag)
     }
 }
