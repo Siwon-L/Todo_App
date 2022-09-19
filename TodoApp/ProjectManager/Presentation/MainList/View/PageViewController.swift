@@ -131,3 +131,9 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         return viewControllers[nextIndex]
     }
 }
+
+extension PageViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+}

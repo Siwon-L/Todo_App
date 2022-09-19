@@ -66,11 +66,22 @@ extension MainFlowCoordinator: ContentListViewDependencies {
     
     func popoverMoveViewController(cell: UITableViewCell?, item: TodoModel) {
         let viewController = dependencies.makeTodoMoveViewController(item: item, coordinator:  self)
+        guard let sourceView = cell else { return }
+        let sourceRect = CGRect(x: sourceView.bounds.midX / 2, y: sourceView.bounds.midY, width: 0, height: 0)
+        
         viewController.modalPresentationStyle = .popover
-        viewController.preferredContentSize = CGSize(width: 300, height: 130)
-        viewController.popoverPresentationController?.sourceView = cell
-        viewController.popoverPresentationController?.sourceRect = cell?.bounds ?? .zero
-        viewController.popoverPresentationController?.permittedArrowDirections = .up
+        
+        viewController.preferredContentSize = CGSize(width: 200, height: 120)
+        viewController.popoverPresentationController?.sourceView = sourceView
+        viewController.popoverPresentationController?.sourceRect = sourceRect
+        if (pageViewController?.view.bounds.maxY ?? .zero) / 2 > sourceView.frame.maxY {
+            viewController.popoverPresentationController?.permittedArrowDirections = .up
+            viewController.arrowDirections = .up
+        } else {
+            viewController.popoverPresentationController?.permittedArrowDirections = .down
+            viewController.arrowDirections = .down
+        }
+        viewController.popoverPresentationController?.delegate = pageViewController
         pageViewController?.present(viewController, animated: true)
         
         todoMoveViewController = viewController
