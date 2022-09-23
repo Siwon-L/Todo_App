@@ -46,6 +46,7 @@
 		9BB15963288FF08000BECEEB /* MockUesCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB15962288FF08000BECEEB /* MockUesCase.swift */; };
 		9BB9AF21288E578E0068030B /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9AF20288E578E0068030B /* HistoryViewController.swift */; };
 		9BB9AF23288E58340068030B /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9AF22288E58340068030B /* HistoryCell.swift */; };
+		9BC08A3E28D9FA79007D3BCF /* UnderLineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC08A3D28D9FA79007D3BCF /* UnderLineSegmentedControl.swift */; };
 		9BCEA9552875E7F500258589 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCEA9542875E7F500258589 /* TodoModel.swift */; };
 		9BCEA95728768C3C00258589 /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCEA95628768C3C00258589 /* TodoListCell.swift */; };
 		9BD2702828D48B6400DACF36 /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD2702728D48B6400DACF36 /* PageViewModel.swift */; };
@@ -117,6 +118,7 @@
 		9BB15962288FF08000BECEEB /* MockUesCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUesCase.swift; sourceTree = "<group>"; };
 		9BB9AF20288E578E0068030B /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		9BB9AF22288E58340068030B /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		9BC08A3D28D9FA79007D3BCF /* UnderLineSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderLineSegmentedControl.swift; sourceTree = "<group>"; };
 		9BCEA9542875E7F500258589 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		9BCEA95628768C3C00258589 /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
 		9BD2702728D48B6400DACF36 /* PageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewModel.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 				9B170C66287AAC74000D061F /* TodoListHeaderView.swift */,
 				9BA8225B2881922C005C6521 /* TodoListTableView.swift */,
 				9BCEA95628768C3C00258589 /* TodoListCell.swift */,
+				9BC08A3D28D9FA79007D3BCF /* UnderLineSegmentedControl.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				9BCEA95728768C3C00258589 /* TodoListCell.swift in Sources */,
 				9B2D9BD828783D5F0062C81A /* DefaultTodoListRepository.swift in Sources */,
 				9BA8225C2881922C005C6521 /* TodoListTableView.swift in Sources */,
+				9BC08A3E28D9FA79007D3BCF /* UnderLineSegmentedControl.swift in Sources */,
 				9B2D9BCD2877F3EE0062C81A /* TodoEditView.swift in Sources */,
 				9BA95C702876EE6400927C63 /* ContentListViewModel.swift in Sources */,
 				9B45247A2888577F0011D5D1 /* FirebaseTodoListStorage.swift in Sources */,
