@@ -17,9 +17,6 @@ protocol PageViewDependencies: AnyObject {
 }
 
 final class PageViewController: UIViewController {
-    private enum Constant {
-        static let navigationBarTitle = "Project Manager"
-    }
     private let viewModel: PageViewModel
     private weak var coordinator: PageViewDependencies?
     private let viewControllers: [UIViewController]
@@ -78,7 +75,6 @@ final class PageViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        title = Constant.navigationBarTitle
         navigationItem.rightBarButtonItem = plusButton
         navigationItem.leftBarButtonItem = historyButton
         navigationItem.backButtonTitle = "Back"

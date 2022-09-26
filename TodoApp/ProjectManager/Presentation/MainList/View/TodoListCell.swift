@@ -9,6 +9,13 @@ import UIKit
 import SnapKit
 
 final class TodoListCell: UITableViewCell, CellIdentifiable {
+    private let backgrandView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
     private lazy var labelStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [titleLabel, bodyLabel, deadlineLabel])
         stackView.axis = .vertical
@@ -43,16 +50,30 @@ final class TodoListCell: UITableViewCell, CellIdentifiable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureLayout()
+        self.selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = 30
+    }
+    
     private func configureLayout() {
-        self.addSubview(labelStackView)
+        backgroundColor = .clear
+        self.addSubview(backgrandView)
+        backgrandView.addSubview(labelStackView)
+        
+        backgrandView.snp.makeConstraints { make in
+            make.top.trailing.leading.equalToSuperview().inset(8)
+            make.bottom.equalToSuperview()
+        }
+        
         labelStackView.snp.makeConstraints { make in
-            make.edges.equalTo(self.safeAreaLayoutGuide).inset(8)
+            make.edges.equalToSuperview().inset(16)
         }
     }
 }

@@ -21,7 +21,7 @@ final class TodoListTableView: UIView {
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .systemGray6
-        
+        tableView.separatorStyle = .none
         return tableView
     }()
     
