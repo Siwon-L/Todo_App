@@ -76,8 +76,7 @@ extension MainSceneDIContainer: MainFlowCoordinatorDependencies {
 
     }
     
-    func makeHistoryViewController(coordinator: HistoryViewControllerDependencies) -> HistoryViewController {
-        return HistoryViewController(viewModel: makeHistoryViewModel(),
-                                         coordinator: coordinator)
+    func makeHistoryViewController() -> HistoryViewController {
+        return HistoryViewController(viewModel: makeHistoryViewModel())
     }
 }

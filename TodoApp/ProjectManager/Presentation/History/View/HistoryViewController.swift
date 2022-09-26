@@ -9,14 +9,9 @@ import UIKit
 import SnapKit
 import RxSwift
 
-protocol HistoryViewControllerDependencies: AnyObject {
-    func popHistoryViewController()
-}
-
 final class HistoryViewController: UIViewController {
     
     private let viewModel: HistoryViewModel
-    private weak var coordinator: HistoryViewControllerDependencies?
     private let bag = DisposeBag()
     
     private let historyTableView: UITableView = {
@@ -31,9 +26,8 @@ final class HistoryViewController: UIViewController {
         bind()
     }
     
-    init(viewModel: HistoryViewModel, coordinator: HistoryViewControllerDependencies) {
+    init(viewModel: HistoryViewModel) {
         self.viewModel = viewModel
-        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
     

@@ -14,7 +14,7 @@ protocol MainFlowCoordinatorDependencies {
                                     coordinator: TodoEditViewControllerDependencies) -> TodoEditViewController
     func makeTodoMoveViewController(item: TodoModel,
                                     coordinator: TodoMoveViewControllerDependencies) -> TodoMoveViewController
-    func makeHistoryViewController(coordinator: HistoryViewControllerDependencies) -> HistoryViewController
+    func makeHistoryViewController() -> HistoryViewController
 }
 
 final class MainFlowCoordinator {
@@ -50,7 +50,7 @@ extension MainFlowCoordinator: PageViewDependencies {
     }
     
     func pushHistoryViewController(button: UIBarButtonItem) {
-        let viewController = dependencies.makeHistoryViewController(coordinator: self)
+        let viewController = dependencies.makeHistoryViewController()
         navigationController?.pushViewController(viewController, animated: true)
         historyViewController = viewController
     }
@@ -103,11 +103,5 @@ extension MainFlowCoordinator: TodoEditViewControllerDependencies {
 extension MainFlowCoordinator: TodoMoveViewControllerDependencies {
     func dismissMoveViewController() {
         todoMoveViewController?.dismiss(animated: true)
-    }
-}
-
-extension MainFlowCoordinator: HistoryViewControllerDependencies {
-    func popHistoryViewController() {
-        navigationController?.popViewController(animated: true)
     }
 }
