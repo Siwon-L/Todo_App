@@ -10,7 +10,7 @@ import RxSwift
 @testable import ProjectManager
 
 class TodoEditViewModelTest: XCTestCase {
-    var viewModel: DefaultTodoEditViewModel!
+    var viewModel: DefaultEditViewModel!
     var useCase: MockUseCase!
     let bag = DisposeBag()
 

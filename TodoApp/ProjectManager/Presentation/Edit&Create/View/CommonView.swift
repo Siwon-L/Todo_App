@@ -1,5 +1,5 @@
 //
-//  TodoEditView.swift
+//  CommonView.swift
 //  ProjectManager
 //
 //  Created by 이시원 on 2022/07/08.
@@ -10,8 +10,8 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-final class TodoEditView: UIView {
-    private lazy var contentStackView: UIStackView = {
+class CommonView: UIView {
+    lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [titleTextField, datePicker, bodyTextView])
         stackView.axis = .vertical
         stackView.spacing = 8
@@ -19,7 +19,7 @@ final class TodoEditView: UIView {
         return stackView
     }()
     
-    fileprivate let titleTextField: UITextField = {
+    let titleTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Title"
         textField.font = .preferredFont(forTextStyle: .title2)
@@ -33,7 +33,7 @@ final class TodoEditView: UIView {
         return textField
     }()
     
-    fileprivate let datePicker: UIDatePicker = {
+    let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
@@ -41,7 +41,7 @@ final class TodoEditView: UIView {
         return datePicker
     }()
     
-    fileprivate let bodyTextView: UITextView = {
+    let bodyTextView: UITextView = {
         let textView = UITextView()
         textView.layer.masksToBounds = false
         textView.backgroundColor = .systemBackground
@@ -62,7 +62,7 @@ final class TodoEditView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureLayout() {
+    func configureLayout() {
         self.addSubview(contentStackView)
         contentStackView.snp.makeConstraints { make in
             make.edges.equalTo(self.safeAreaLayoutGuide).inset(20)
@@ -74,7 +74,7 @@ final class TodoEditView: UIView {
     }
 }
 
-extension TodoEditView {
+extension CommonView {
     func setupView(by item: TodoModel?) {
         guard let item = item else { return }
         titleTextField.text = item.title
@@ -82,14 +82,14 @@ extension TodoEditView {
         datePicker.date = item.deadlineAt
     }
     
-    func changeEnabled(_ value: Bool) {
+    func setEnabled(_ value: Bool) {
         titleTextField.isEnabled = value
         datePicker.isEnabled = value
         bodyTextView.isEditable = value
     }
 }
 
-extension Reactive where Base == TodoEditView {
+extension Reactive where Base == CommonView {
     var titleText: ControlProperty<String?> {
         return base.titleTextField.rx.text
     }

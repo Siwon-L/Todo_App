@@ -11,7 +11,7 @@ import SnapKit
 import RxSwift
 
 protocol PageViewDependencies: AnyObject {
-    func presentPlusViewController()
+    func presentCreateViewController()
     func pushHistoryViewController(button: UIBarButtonItem)
     func showErrorAlert(message: String)
 }
@@ -92,7 +92,7 @@ extension PageViewController {
         
         plusButton.rx.tap
             .bind { [weak self] in
-                self?.coordinator?.presentPlusViewController()
+                self?.coordinator?.presentCreateViewController()
             }.disposed(by: bag)
         
         historyButton.rx.tap

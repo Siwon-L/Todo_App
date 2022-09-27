@@ -11,7 +11,6 @@ final class TodoListTableView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [headerView, tableView])
         stackView.axis = .vertical
-        stackView.spacing = 1
         
         return stackView
     }()
@@ -22,6 +21,7 @@ final class TodoListTableView: UIView {
         let tableView = UITableView()
         tableView.backgroundColor = .systemGray6
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
