@@ -14,6 +14,13 @@ final class HistoryViewController: UIViewController {
     private let viewModel: HistoryViewModel
     private let bag = DisposeBag()
     
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .largeTitle)
+        
+        return label
+    }()
+    
     private let historyTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(HistoryCell.self, forCellReuseIdentifier: HistoryCell.identifier)
@@ -39,11 +46,18 @@ final class HistoryViewController: UIViewController {
 //MARK: - View Setting
 extension HistoryViewController {
     private func configureView() {
-        title = "History"
+        titleLabel.text = "HISTORY"
         view.backgroundColor = .systemBackground
-        self.view.addSubview(historyTableView)
+        view.addSubview(titleLabel)
+        view.addSubview(historyTableView)
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(historyTableView.snp.top).inset(-8)
+        }
+        
         historyTableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.trailing.leading.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }

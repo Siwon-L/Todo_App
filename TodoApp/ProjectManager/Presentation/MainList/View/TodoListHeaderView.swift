@@ -16,7 +16,7 @@ final class TodoListHeaderView: UIView {
         return stackView
     }()
     
-    fileprivate lazy var titleLabel: UILabel = {
+    fileprivate let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .largeTitle)
         

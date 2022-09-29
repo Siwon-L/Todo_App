@@ -78,7 +78,7 @@ final class PageViewController: UIViewController {
         navigationItem.rightBarButtonItem = plusButton
         navigationItem.leftBarButtonItem = historyButton
         navigationItem.backButtonTitle = "Back"
-        historyButton.title = "History"
+        historyButton.image = UIImage(systemName: "clock")
     }
 }
 
