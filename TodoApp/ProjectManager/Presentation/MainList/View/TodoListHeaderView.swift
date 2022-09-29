@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-final class TodoListH eaderView: UIView {
+final class TodoListHeaderView: UIView {
     private lazy var labelStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [titleLabel, countLabel])
         stackView.spacing = 8
