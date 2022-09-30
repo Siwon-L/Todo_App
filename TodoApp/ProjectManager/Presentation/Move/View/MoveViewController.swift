@@ -1,5 +1,5 @@
 //
-//  PopoverViewController.swift
+//  MoveViewController.swift
 //  ProjectManager
 //
 //  Created by 이시원 on 2022/07/13.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 
-protocol TodoMoveViewControllerDependencies: AnyObject {
+protocol MoveViewControllerDependencies: AnyObject {
     func dismissMoveViewController()
 }
 
@@ -18,9 +18,9 @@ enum ArrowDirections {
     case down
 }
 
-final class TodoMoveViewController: UIViewController {
-    private let viewModel: TodoMoveViewModel
-    private weak var coordinator: TodoMoveViewControllerDependencies?
+final class MoveViewController: UIViewController {
+    private let viewModel: MoveViewModel
+    private weak var coordinator: MoveViewControllerDependencies?
     var arrowDirections: ArrowDirections?
     private let bag = DisposeBag()
     
@@ -54,7 +54,7 @@ final class TodoMoveViewController: UIViewController {
         return stackView
     }()
     
-    init(viewModel: TodoMoveViewModel, coordinator: TodoMoveViewControllerDependencies) {
+    init(viewModel: MoveViewModel, coordinator: MoveViewControllerDependencies) {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
@@ -72,7 +72,7 @@ final class TodoMoveViewController: UIViewController {
 }
 
 //MARK: - View Setting
-extension TodoMoveViewController {
+extension MoveViewController {
     private func configureView() {
         view.backgroundColor = .systemGray5
         view.addSubview(buttomStackView)
@@ -90,7 +90,7 @@ extension TodoMoveViewController {
 }
 
 //MARK: - ViewModel Bind
-extension TodoMoveViewController {
+extension MoveViewController {
     private func bind() {
         viewModel.buttonTitle
             .bind { [weak self] in

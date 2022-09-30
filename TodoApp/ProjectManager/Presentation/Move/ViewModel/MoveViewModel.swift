@@ -1,5 +1,5 @@
 //
-//  TodoMoveViewModel.swift
+//  MoveViewModel.swift
 //  ProjectManager
 //
 //  Created by 이시원 on 2022/07/14.
@@ -9,19 +9,19 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol TodoMoveViewModelInput {
+protocol MoveViewModelInput {
     func firstButtonDidTap()
     func secondButtonDidTap()
     func deleteButonDidTap()
 }
 
-protocol TodoMoveViewModelOutput {
+protocol MoveViewModelOutput {
     var buttonTitle: Observable<[String]> { get }
 }
 
-protocol TodoMoveViewModel: TodoMoveViewModelInput, TodoMoveViewModelOutput {}
+protocol MoveViewModel: MoveViewModelInput, MoveViewModelOutput {}
 
-final class DefaultTodoMoveViewModel {
+final class DefaultMoveViewModel {
     private let useCase: TodoListUseCase
     private let item: TodoModel
     
@@ -42,7 +42,7 @@ final class DefaultTodoMoveViewModel {
     }
 }
 
-extension DefaultTodoMoveViewModel: TodoMoveViewModel {
+extension DefaultMoveViewModel: MoveViewModel {
     
     //MARK: - Output
     var buttonTitle: Observable<[String]> {

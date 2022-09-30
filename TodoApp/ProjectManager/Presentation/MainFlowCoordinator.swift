@@ -12,8 +12,8 @@ protocol MainFlowCoordinatorDependencies {
     func makeContentViewControllers(coordinator: ContentListViewDependencies) -> [ContentListViewController]
     func makeEditViewController(item: TodoModel?) -> EditViewController
     func makeCreateViewController(coordinator: CreateViewControllerDependencies) -> CreateViewController
-    func makeTodoMoveViewController(item: TodoModel,
-                                    coordinator: TodoMoveViewControllerDependencies) -> TodoMoveViewController
+    func makeMoveViewController(item: TodoModel,
+                                    coordinator: MoveViewControllerDependencies) -> MoveViewController
     func makeHistoryViewController() -> HistoryViewController
 }
 
@@ -23,7 +23,7 @@ final class MainFlowCoordinator {
     private weak var pageViewController: PageViewController?
     private weak var editViewController: EditViewController?
     private weak var createViewController: CreateViewController?
-    private weak var todoMoveViewController: TodoMoveViewController?
+    private weak var moveViewController: MoveViewController?
     private weak var historyViewController: HistoryViewController?
     
     init(navigationController: UINavigationController, dependencies: MainFlowCoordinatorDependencies) {
@@ -68,7 +68,7 @@ extension MainFlowCoordinator: ContentListViewDependencies {
     }
     
     func popoverMoveViewController(cell: UITableViewCell?, item: TodoModel) {
-        let viewController = dependencies.makeTodoMoveViewController(item: item, coordinator:  self)
+        let viewController = dependencies.makeMoveViewController(item: item, coordinator:  self)
         guard let sourceView = cell else { return }
         let sourceRect = CGRect(x: sourceView.bounds.midX / 2, y: sourceView.bounds.midY, width: 0, height: 0)
         
@@ -87,7 +87,7 @@ extension MainFlowCoordinator: ContentListViewDependencies {
         viewController.popoverPresentationController?.delegate = pageViewController
         pageViewController?.present(viewController, animated: true)
         
-        todoMoveViewController = viewController
+        moveViewController = viewController
     }
     
     func showErrorAlert(message: String) {
@@ -103,8 +103,8 @@ extension MainFlowCoordinator: CreateViewControllerDependencies {
     }
 }
 
-extension MainFlowCoordinator: TodoMoveViewControllerDependencies {
+extension MainFlowCoordinator: MoveViewControllerDependencies {
     func dismissMoveViewController() {
-        todoMoveViewController?.dismiss(animated: true)
+        moveViewController?.dismiss(animated: true)
     }
 }

@@ -30,8 +30,8 @@ final class MainSceneDIContainer {
         return DefaultCreateViewModel(useCase: makeTodoListUseCase())
     }
     
-    private func makeTodoMoveViewModel(item: TodoModel) -> TodoMoveViewModel {
-        return DefaultTodoMoveViewModel(useCase: makeTodoListUseCase(), item: item)
+    private func makeMoveViewModel(item: TodoModel) -> MoveViewModel {
+        return DefaultMoveViewModel(useCase: makeTodoListUseCase(), item: item)
     }
     
     private func makeHistoryViewModel() -> HistoryViewModel {
@@ -67,9 +67,9 @@ extension MainSceneDIContainer: MainFlowCoordinatorDependencies {
         ]
     }
     
-    func makeTodoMoveViewController(item: TodoModel,
-                                    coordinator: TodoMoveViewControllerDependencies) -> TodoMoveViewController {
-        return TodoMoveViewController(viewModel: makeTodoMoveViewModel(item: item),
+    func makeMoveViewController(item: TodoModel,
+                                    coordinator: MoveViewControllerDependencies) -> MoveViewController {
+        return MoveViewController(viewModel: makeMoveViewModel(item: item),
                                       coordinator: coordinator)
     }
     
