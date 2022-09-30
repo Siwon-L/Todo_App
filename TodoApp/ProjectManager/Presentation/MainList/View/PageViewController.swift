@@ -9,6 +9,7 @@ import UIKit
 
 import SnapKit
 import RxSwift
+import CustomUIKit
 
 protocol PageViewDependencies: AnyObject {
     func presentCreateViewController()
@@ -23,8 +24,8 @@ final class PageViewController: UIViewController {
     private let plusButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
     private let historyButton = UIBarButtonItem()
     private let bag = DisposeBag()
-    private let segmentedControl: UnderLineSegmentedControl = {
-        let control = UnderLineSegmentedControl(
+    private let segmentedControl: CUISegmentControl = {
+        let control = CUISegmentControl(
             items: [
                 "TODO",
                 "DOING",
@@ -138,7 +139,6 @@ extension PageViewController {
                 direction: .reverse,
                 animated: true
             )
-
     }
 }
 

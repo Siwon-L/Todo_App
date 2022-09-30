@@ -1,13 +1,13 @@
 //
-//  UnderLineSegmentedControl.swift
-//  ProjectManager
+//  CustomUISegmentControl.swift
+//  CustomUIKit
 //
-//  Created by 이시원 on 2022/09/20.
+//  Created by 이시원 on 2022/09/30.
 //
 
 import UIKit
 
-final class UnderLineSegmentedControl: UISegmentedControl {
+public final class CUISegmentControl: UISegmentedControl {
     private var completion: ((Int, Int) -> Void)?
     private lazy var currentIndex: Int = selectedSegmentIndex {
         didSet {
@@ -30,7 +30,7 @@ final class UnderLineSegmentedControl: UISegmentedControl {
         return view
     }()
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         let point = self.bounds.size.width / CGFloat(self.numberOfSegments)
         let width = point * 0.7
@@ -41,7 +41,7 @@ final class UnderLineSegmentedControl: UISegmentedControl {
         }
     }
     
-    override init(items: [Any]?) {
+    public override init(items: [Any]?) {
         super.init(items: items)
         selectedSegmentIndex = 0
         removeBackgroundAndDivider()
@@ -65,11 +65,11 @@ final class UnderLineSegmentedControl: UISegmentedControl {
         )
     }
     
-    func setAction(_ action: @escaping (Int, Int) -> Void) {
+    public func setAction(_ action: @escaping (Int, Int) -> Void) {
         completion = action
     }
     
-    func setUnderlineColor(_ color: UIColor) {
+    public func setUnderlineColor(_ color: UIColor) {
         underlineView.backgroundColor = color
     }
 }

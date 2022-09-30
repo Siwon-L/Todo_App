@@ -1,23 +1,23 @@
 //
-//  TodoListTableView.swift
-//  ProjectManager
+//  CustomUITableView.swift
+//  CustomUIKit
 //
-//  Created by 이시원 on 2022/07/15.
+//  Created by 이시원 on 2022/09/29.
 //
 
 import UIKit
 
-final class TodoListTableView: UIView {
+public final class CUITableView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [headerView, tableView])
         stackView.axis = .vertical
-        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
-    let headerView: TodoListHeaderView
+    public let headerView: CUIHeaderView
    
-    let tableView: UITableView = {
+    public let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .systemGray6
         tableView.separatorStyle = .none
@@ -25,25 +25,26 @@ final class TodoListTableView: UIView {
         return tableView
     }()
     
-    init(title: String? = nil) {
-        headerView = TodoListHeaderView(title: title)
+    public init(title: String? = nil) {
+        headerView = CUIHeaderView(title: title)
         super.init(frame: .zero)
         configureLayout()
-        tableViewsCellRegister()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    public func register(_ cellClass: AnyClass, forCellReuseIdentifier: String) {
+        tableView.register(cellClass, forCellReuseIdentifier: forCellReuseIdentifier)
+    }
+    
+    
     private func configureLayout() {
         self.addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    }
-    
-    private func tableViewsCellRegister() {
-        tableView.register(TodoListCell.self, forCellReuseIdentifier: TodoListCell.identifier)
     }
 }

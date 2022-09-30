@@ -6,16 +6,17 @@
 //
 
 import UIKit
+
 import SnapKit
+import CustomUIKit
 
 final class ContentListView: UIView {
-    let list = TodoListTableView()
+    let list = CUITableView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLayout()
         self.backgroundColor = .systemBackground
-        
     }
     
     required init?(coder: NSCoder) {
@@ -27,5 +28,8 @@ final class ContentListView: UIView {
         list.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        list.tableView.register(TodoListCell.self, forCellReuseIdentifier: TodoListCell.identifier)
+        
     }
 }
