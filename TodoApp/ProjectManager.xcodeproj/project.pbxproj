@@ -148,7 +148,7 @@
 		9BA95C6F2876EE6400927C63 /* ContentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListViewModel.swift; sourceTree = "<group>"; };
 		9BA95C73287701B300927C63 /* Date+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
 		9BA95C76287713C400927C63 /* CellIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
-		9BB15959288FEFC400BECEEB /* ProjectManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BB15959288FEFC400BECEEB /* ProjectManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ProjectManagerTests.xctest; path = "/Users/isiwon/Todo_App/TodoApp/build/Debug-iphoneos/ProjectManagerTests.xctest"; sourceTree = "<absolute>"; };
 		9BB1595B288FEFC400BECEEB /* TodoListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModelTest.swift; sourceTree = "<group>"; };
 		9BB15962288FF08000BECEEB /* MockUesCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUesCase.swift; sourceTree = "<group>"; };
 		9BB9AF20288E578E0068030B /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 		9BF4A9D32893858C0098DC1B /* TodoListUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListUseCaseTest.swift; sourceTree = "<group>"; };
 		9BF85573288657AE0098441C /* TodoEntity+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoEntity+Realm.swift"; sourceTree = "<group>"; };
 		9BF8557828869E2D0098441C /* RealmTodoListStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTodoListStorage.swift; sourceTree = "<group>"; };
-		C7431F0225F51E1D0094C4CF /* ProjectManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7431F0225F51E1D0094C4CF /* ProjectManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ProjectManager.app; path = "/Users/isiwon/Todo_App/TodoApp/build/Debug-iphoneos/ProjectManager.app"; sourceTree = "<absolute>"; };
 		C7431F0525F51E1D0094C4CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7431F0725F51E1D0094C4CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C7431F0925F51E1D0094C4CF /* ContentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListViewController.swift; sourceTree = "<group>"; };
@@ -538,13 +538,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		9BE511E328E5E23600DE1407 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		9BE5127F28E6EBAD00DE1407 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,18 +563,7 @@
 				9BE5127E28E6EBAD00DE1407 /* CustomUIKit.xcodeproj */,
 				C7431F0425F51E1D0094C4CF /* ProjectManager */,
 				9BB1595A288FEFC400BECEEB /* ProjectManagerTests */,
-				C7431F0325F51E1D0094C4CF /* Products */,
-				9BE511E328E5E23600DE1407 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		C7431F0325F51E1D0094C4CF /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C7431F0225F51E1D0094C4CF /* ProjectManager.app */,
-				9BB15959288FEFC400BECEEB /* ProjectManagerTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		C7431F0425F51E1D0094C4CF /* ProjectManager */ = {
@@ -679,7 +661,7 @@
 				9BF85575288658B30098441C /* XCRemoteSwiftPackageReference "realm-swift" */,
 				9B45247428884DC50011D5D1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
-			productRefGroup = C7431F0325F51E1D0094C4CF /* Products */;
+			productRefGroup = C7431EF925F51E1D0094C4CF;
 			projectDirPath = "";
 			projectReferences = (
 				{
