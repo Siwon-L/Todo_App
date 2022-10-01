@@ -45,7 +45,7 @@
 		9BA95C702876EE6400927C63 /* ContentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA95C6F2876EE6400927C63 /* ContentListViewModel.swift */; };
 		9BA95C74287701B300927C63 /* Date+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA95C73287701B300927C63 /* Date+ToString.swift */; };
 		9BA95C77287713C400927C63 /* CellIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA95C76287713C400927C63 /* CellIdentifiable.swift */; };
-		9BB1595C288FEFC400BECEEB /* TodoListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB1595B288FEFC400BECEEB /* TodoListViewModelTest.swift */; };
+		9BB1595C288FEFC400BECEEB /* ContentListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB1595B288FEFC400BECEEB /* ContentListViewModelTest.swift */; };
 		9BB15963288FF08000BECEEB /* MockUesCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB15962288FF08000BECEEB /* MockUesCase.swift */; };
 		9BB9AF21288E578E0068030B /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9AF20288E578E0068030B /* HistoryViewController.swift */; };
 		9BB9AF23288E58340068030B /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9AF22288E58340068030B /* HistoryCell.swift */; };
@@ -149,7 +149,7 @@
 		9BA95C73287701B300927C63 /* Date+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
 		9BA95C76287713C400927C63 /* CellIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
 		9BB15959288FEFC400BECEEB /* ProjectManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ProjectManagerTests.xctest; path = "/Users/isiwon/Todo_App/TodoApp/build/Debug-iphoneos/ProjectManagerTests.xctest"; sourceTree = "<absolute>"; };
-		9BB1595B288FEFC400BECEEB /* TodoListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModelTest.swift; sourceTree = "<group>"; };
+		9BB1595B288FEFC400BECEEB /* ContentListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListViewModelTest.swift; sourceTree = "<group>"; };
 		9BB15962288FF08000BECEEB /* MockUesCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUesCase.swift; sourceTree = "<group>"; };
 		9BB9AF20288E578E0068030B /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		9BB9AF22288E58340068030B /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
@@ -484,7 +484,7 @@
 		9BB15964288FF17200BECEEB /* ViewModelTests */ = {
 			isa = PBXGroup;
 			children = (
-				9BB1595B288FEFC400BECEEB /* TodoListViewModelTest.swift */,
+				9BB1595B288FEFC400BECEEB /* ContentListViewModelTest.swift */,
 				9BD40D4C289120C100939532 /* TodoEditViewModelTest.swift */,
 				9BD40D4E289152FF00939532 /* TodoMoveViewModelTest.swift */,
 				9BD40D502891618E00939532 /* HistoryViewModelTest.swift */,
@@ -719,7 +719,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BB1595C288FEFC400BECEEB /* TodoListViewModelTest.swift in Sources */,
+				9BB1595C288FEFC400BECEEB /* ContentListViewModelTest.swift in Sources */,
 				9BD40D512891618E00939532 /* HistoryViewModelTest.swift in Sources */,
 				9B518EA42893E31A001DB579 /* MockHistoryRepository.swift in Sources */,
 				9BD40D4D289120C100939532 /* TodoEditViewModelTest.swift in Sources */,
