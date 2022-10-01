@@ -21,7 +21,7 @@ final class MainSceneDIContainer {
         return DefaultContentListViewModel(useCase: makeTodoListUseCase(), targetState: targetState)
     }
     
-    private func makeEditViewModel(item: TodoModel?) -> DefaultEditViewModel {
+    private func makeEditViewModel(item: TodoModel) -> DefaultEditViewModel {
         return DefaultEditViewModel(useCase: makeTodoListUseCase(),
                                         item: item)
     }
@@ -73,7 +73,7 @@ extension MainSceneDIContainer: MainFlowCoordinatorDependencies {
                                       coordinator: coordinator)
     }
     
-    func makeEditViewController(item: TodoModel?) -> EditViewController {
+    func makeEditViewController(item: TodoModel) -> EditViewController {
         return EditViewController(viewModel: makeEditViewModel(item: item))
 
     }

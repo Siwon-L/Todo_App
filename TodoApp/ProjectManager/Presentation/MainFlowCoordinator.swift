@@ -10,7 +10,7 @@ import UIKit
 protocol MainFlowCoordinatorDependencies {
     func makePageViewController(coordinator: PageViewDependencies, viewControllers: [ContentListViewController]) -> PageViewController
     func makeContentViewControllers(coordinator: ContentListViewDependencies) -> [ContentListViewController]
-    func makeEditViewController(item: TodoModel?) -> EditViewController
+    func makeEditViewController(item: TodoModel) -> EditViewController
     func makeCreateViewController(coordinator: CreateViewControllerDependencies) -> CreateViewController
     func makeMoveViewController(item: TodoModel,
                                     coordinator: MoveViewControllerDependencies) -> MoveViewController
@@ -61,7 +61,7 @@ extension MainFlowCoordinator: PageViewDependencies {
 }
 
 extension MainFlowCoordinator: ContentListViewDependencies {
-    func pushEditViewController(item: TodoModel?) {
+    func pushEditViewController(item: TodoModel) {
         let viewController = dependencies.makeEditViewController(item: item)
         navigationController?.pushViewController(viewController, animated: true)
         editViewController = viewController

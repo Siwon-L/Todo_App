@@ -18,7 +18,7 @@ protocol EditViewModelInput {
 }
 
 protocol EditViewModelOutput {
-    var setUpView: Observable<TodoModel?> { get }
+    var setUpView: Observable<TodoModel> { get }
     var setEditMode: BehaviorRelay<Bool> { get }
 }
 
@@ -26,20 +26,22 @@ protocol EditViewModel: EditViewModelInput, EditViewModelOutput {}
 
 final class DefaultEditViewModel {
     private let useCase: TodoListUseCase
-    private var item: TodoModel?
+    private var item: TodoModel
     private var isEditMode = false
+    private var itemSnapshot: TodoModel
     var setEditMode = BehaviorRelay<Bool>(value: false)
     
-    init(useCase: TodoListUseCase, item: TodoModel?) {
+    init(useCase: TodoListUseCase, item: TodoModel) {
         self.useCase = useCase
         self.item = item
+        self.itemSnapshot = item
     }
 }
 
 extension DefaultEditViewModel: EditViewModel {
    
     //MARK: - Output
-    var setUpView: Observable<TodoModel?> {
+    var setUpView: Observable<TodoModel> {
         return Observable.just(item)
     }
     
@@ -50,18 +52,20 @@ extension DefaultEditViewModel: EditViewModel {
     }
     
     func popView() {
-        useCase.updateItem(to: item!)
+        if item != itemSnapshot {
+            useCase.updateItem(to: item)
+        }
     }
     
     func inputitle(title: String?) {
-        item?.title = title
+        item.title = title
     }
     
     func inputDeadline(deadline: Date) {
-        item?.deadlineAt = deadline
+        item.deadlineAt = deadline
     }
     
     func inputBody(body: String?) {
-        item?.body = body
+        item.body = body
     }
 }

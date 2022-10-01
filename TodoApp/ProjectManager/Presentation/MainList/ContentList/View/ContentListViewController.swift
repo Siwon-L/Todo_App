@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol ContentListViewDependencies: AnyObject {
-    func pushEditViewController(item: TodoModel?)
+    func pushEditViewController(item: TodoModel)
     func popoverMoveViewController(cell: UITableViewCell?, item: TodoModel)
     func showErrorAlert(message: String)
 }
@@ -80,7 +80,7 @@ extension ContentListViewController {
         mainView.list.tableView.rx.listItemSelected(ContentCellItem.self)
             .bind { [weak self] (indexPath, item) in
                 self?.mainView.list.tableView.deselectRow(at: indexPath, animated: true)
-                let item = self?.viewModel.cellSelected(id: item.id)
+                guard let item = self?.viewModel.cellSelected(id: item.id) else { return }
                 self?.coordinator?.pushEditViewController(item: item)
             }.disposed(by: bag)
     }
