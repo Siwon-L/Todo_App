@@ -52,7 +52,7 @@
 		9BCEA9552875E7F500258589 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCEA9542875E7F500258589 /* TodoModel.swift */; };
 		9BCEA95728768C3C00258589 /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCEA95628768C3C00258589 /* TodoListCell.swift */; };
 		9BD2702828D48B6400DACF36 /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD2702728D48B6400DACF36 /* PageViewModel.swift */; };
-		9BD40D4D289120C100939532 /* TodoEditViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40D4C289120C100939532 /* TodoEditViewModelTest.swift */; };
+		9BD40D4D289120C100939532 /* EditViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40D4C289120C100939532 /* EditViewModelTest.swift */; };
 		9BD40D4F289152FF00939532 /* TodoMoveViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40D4E289152FF00939532 /* TodoMoveViewModelTest.swift */; };
 		9BD40D512891618E00939532 /* HistoryViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40D502891618E00939532 /* HistoryViewModelTest.swift */; };
 		9BDA0189287445C500C8F7C8 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 9BDA0188287445C500C8F7C8 /* RxCocoa */; };
@@ -156,7 +156,7 @@
 		9BCEA9542875E7F500258589 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		9BCEA95628768C3C00258589 /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
 		9BD2702728D48B6400DACF36 /* PageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewModel.swift; sourceTree = "<group>"; };
-		9BD40D4C289120C100939532 /* TodoEditViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEditViewModelTest.swift; sourceTree = "<group>"; };
+		9BD40D4C289120C100939532 /* EditViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModelTest.swift; sourceTree = "<group>"; };
 		9BD40D4E289152FF00939532 /* TodoMoveViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoMoveViewModelTest.swift; sourceTree = "<group>"; };
 		9BD40D502891618E00939532 /* HistoryViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModelTest.swift; sourceTree = "<group>"; };
 		9BDA018F287464E800C8F7C8 /* ContentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListView.swift; sourceTree = "<group>"; };
@@ -485,7 +485,7 @@
 			isa = PBXGroup;
 			children = (
 				9BB1595B288FEFC400BECEEB /* ContentListViewModelTest.swift */,
-				9BD40D4C289120C100939532 /* TodoEditViewModelTest.swift */,
+				9BD40D4C289120C100939532 /* EditViewModelTest.swift */,
 				9BD40D4E289152FF00939532 /* TodoMoveViewModelTest.swift */,
 				9BD40D502891618E00939532 /* HistoryViewModelTest.swift */,
 				9BB15962288FF08000BECEEB /* MockUesCase.swift */,
@@ -722,7 +722,7 @@
 				9BB1595C288FEFC400BECEEB /* ContentListViewModelTest.swift in Sources */,
 				9BD40D512891618E00939532 /* HistoryViewModelTest.swift in Sources */,
 				9B518EA42893E31A001DB579 /* MockHistoryRepository.swift in Sources */,
-				9BD40D4D289120C100939532 /* TodoEditViewModelTest.swift in Sources */,
+				9BD40D4D289120C100939532 /* EditViewModelTest.swift in Sources */,
 				9BB15963288FF08000BECEEB /* MockUesCase.swift in Sources */,
 				9B518EA22893E2EB001DB579 /* MockListRepository.swift in Sources */,
 				9BD40D4F289152FF00939532 /* TodoMoveViewModelTest.swift in Sources */,

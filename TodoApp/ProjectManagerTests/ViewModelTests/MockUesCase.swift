@@ -11,6 +11,8 @@ import RxCocoa
 @testable import ProjectManager
 
 enum UseCaseAction {
+    case readItems
+    case readHistorys
     case create
     case delete
     case update
@@ -26,16 +28,18 @@ class MockUseCase: TodoListUseCase {
     var actions: [UseCaseAction] = []
     var targetId: UUID?
     
-    init() {
-        self.todoList = .init(value: [])
-        self.historyList = .init(value: [])
+    init(listData: [TodoModel] = [], historyData: [History] = []) {
+        self.todoList = .init(value: listData)
+        self.historyList = .init(value: historyData)
     }
     
     func readItems() -> BehaviorSubject<[TodoModel]> {
+        actions.append(.readItems)
         return todoList
     }
     
     func readHistoryItems() -> BehaviorSubject<[History]> {
+        actions.append(.readHistorys)
         return historyList
     }
     
