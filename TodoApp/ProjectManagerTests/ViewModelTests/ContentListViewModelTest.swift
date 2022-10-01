@@ -33,7 +33,7 @@ class ContentListViewModelTest: XCTestCase {
     }
     
     func test_contentList를_호출했을때_dummy의_state가_todo인_item과_동일한_title을_가진_output이_나와야한다() {
-        // give
+        // given
         let targetState: State = .todo
         sut = DefaultContentListViewModel(useCase: useCase, targetState: targetState)
         let input = dummyData.filter { $0.state == targetState }
@@ -50,7 +50,7 @@ class ContentListViewModelTest: XCTestCase {
     }
     
     func test_contentList를_호출했을때_dummy의_state가_doing인_item과_동일한_title을_가진_output이_나와야한다() {
-        // give
+        // given
         let targetState: State = .doing
         sut = DefaultContentListViewModel(useCase: useCase, targetState: targetState)
         let input = dummyData.filter { $0.state == targetState }
@@ -67,7 +67,7 @@ class ContentListViewModelTest: XCTestCase {
     }
     
     func test_contentList를_호출했을때_dummy의_state가_done인_item과_동일한_title을_가진_output이_나와야한다() {
-        // give
+        // given
         let targetState: State = .done
         sut = DefaultContentListViewModel(useCase: useCase, targetState: targetState)
         let input = dummyData.filter { $0.state == targetState }
@@ -126,7 +126,7 @@ class ContentListViewModelTest: XCTestCase {
     }
     
     func test_listTitle를_호출했을때_targetState가_todo이면_output이_TODO여야한다() {
-        // give
+        // given
         sut = DefaultContentListViewModel(useCase: useCase, targetState: .todo)
         // when
         sut.listTitle
@@ -138,7 +138,7 @@ class ContentListViewModelTest: XCTestCase {
     }
     
     func test_listTitle를_호출했을때_targetState가_doing이면_output이_DOING여야한다() {
-        // give
+        // given
         sut = DefaultContentListViewModel(useCase: useCase, targetState: .doing)
         // when
         sut.listTitle
@@ -150,7 +150,7 @@ class ContentListViewModelTest: XCTestCase {
     }
     
     func test_listTitle를_호출했을때_targetState가_done_output이_DONE여야한다() {
-        // give
+        // given
         sut = DefaultContentListViewModel(useCase: useCase, targetState: .done)
         // when
         sut.listTitle
@@ -161,7 +161,7 @@ class ContentListViewModelTest: XCTestCase {
     }
     
     func test_cellSelected를_호출했을때_id를_통해_input과_동일한_output이_반환되어야_한다() {
-        // give
+        // given
         let targetState: State = .todo
         sut = DefaultContentListViewModel(useCase: useCase, targetState: targetState)
         let input = dummyData.first { $0.state == targetState }!
