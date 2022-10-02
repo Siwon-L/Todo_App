@@ -22,10 +22,11 @@ protocol CreateViewModel: CreateViewModelInput, CreateViewModelOutput {}
 
 final class DefaultCreateViewModel {
     private let useCase: TodoListUseCase
-    private var item = TodoModel()
+    private var item: TodoModel
     
-    init(useCase: TodoListUseCase) {
+    init(useCase: TodoListUseCase, item: TodoModel = TodoModel()) {
         self.useCase = useCase
+        self.item = item
     }
 }
 
