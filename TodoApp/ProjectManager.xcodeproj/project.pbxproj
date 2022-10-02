@@ -53,7 +53,7 @@
 		9BCEA95728768C3C00258589 /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCEA95628768C3C00258589 /* TodoListCell.swift */; };
 		9BD2702828D48B6400DACF36 /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD2702728D48B6400DACF36 /* PageViewModel.swift */; };
 		9BD40D4D289120C100939532 /* EditViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40D4C289120C100939532 /* EditViewModelTest.swift */; };
-		9BD40D4F289152FF00939532 /* TodoMoveViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40D4E289152FF00939532 /* TodoMoveViewModelTest.swift */; };
+		9BD40D4F289152FF00939532 /* MoveViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40D4E289152FF00939532 /* MoveViewModelTest.swift */; };
 		9BD40D512891618E00939532 /* HistoryViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40D502891618E00939532 /* HistoryViewModelTest.swift */; };
 		9BDA0189287445C500C8F7C8 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 9BDA0188287445C500C8F7C8 /* RxCocoa */; };
 		9BDA018B287445C500C8F7C8 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9BDA018A287445C500C8F7C8 /* RxSwift */; };
@@ -148,23 +148,23 @@
 		9BA95C6F2876EE6400927C63 /* ContentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListViewModel.swift; sourceTree = "<group>"; };
 		9BA95C73287701B300927C63 /* Date+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
 		9BA95C76287713C400927C63 /* CellIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
-		9BB15959288FEFC400BECEEB /* ProjectManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ProjectManagerTests.xctest; path = "/Users/isiwon/Todo_App/TodoApp/build/Debug-iphoneos/ProjectManagerTests.xctest"; sourceTree = "<absolute>"; };
 		9BB1595B288FEFC400BECEEB /* ContentListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListViewModelTest.swift; sourceTree = "<group>"; };
 		9BB15962288FF08000BECEEB /* MockUesCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUesCase.swift; sourceTree = "<group>"; };
+		9BB4C0EA28E95432009D8A25 /* ProjectManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BB4C0EB28E95432009D8A25 /* ProjectManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB9AF20288E578E0068030B /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		9BB9AF22288E58340068030B /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		9BCEA9542875E7F500258589 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		9BCEA95628768C3C00258589 /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
 		9BD2702728D48B6400DACF36 /* PageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewModel.swift; sourceTree = "<group>"; };
 		9BD40D4C289120C100939532 /* EditViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModelTest.swift; sourceTree = "<group>"; };
-		9BD40D4E289152FF00939532 /* TodoMoveViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoMoveViewModelTest.swift; sourceTree = "<group>"; };
+		9BD40D4E289152FF00939532 /* MoveViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveViewModelTest.swift; sourceTree = "<group>"; };
 		9BD40D502891618E00939532 /* HistoryViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModelTest.swift; sourceTree = "<group>"; };
 		9BDA018F287464E800C8F7C8 /* ContentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListView.swift; sourceTree = "<group>"; };
 		9BE5127E28E6EBAD00DE1407 /* CustomUIKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CustomUIKit.xcodeproj; path = ../CustomUIKit/CustomUIKit.xcodeproj; sourceTree = "<group>"; };
 		9BF4A9D32893858C0098DC1B /* TodoListUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListUseCaseTest.swift; sourceTree = "<group>"; };
 		9BF85573288657AE0098441C /* TodoEntity+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoEntity+Realm.swift"; sourceTree = "<group>"; };
 		9BF8557828869E2D0098441C /* RealmTodoListStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTodoListStorage.swift; sourceTree = "<group>"; };
-		C7431F0225F51E1D0094C4CF /* ProjectManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ProjectManager.app; path = "/Users/isiwon/Todo_App/TodoApp/build/Debug-iphoneos/ProjectManager.app"; sourceTree = "<absolute>"; };
 		C7431F0525F51E1D0094C4CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7431F0725F51E1D0094C4CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C7431F0925F51E1D0094C4CF /* ContentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListViewController.swift; sourceTree = "<group>"; };
@@ -486,7 +486,7 @@
 			children = (
 				9BB1595B288FEFC400BECEEB /* ContentListViewModelTest.swift */,
 				9BD40D4C289120C100939532 /* EditViewModelTest.swift */,
-				9BD40D4E289152FF00939532 /* TodoMoveViewModelTest.swift */,
+				9BD40D4E289152FF00939532 /* MoveViewModelTest.swift */,
 				9BD40D502891618E00939532 /* HistoryViewModelTest.swift */,
 				9BB15962288FF08000BECEEB /* MockUesCase.swift */,
 			);
@@ -563,6 +563,8 @@
 				9BE5127E28E6EBAD00DE1407 /* CustomUIKit.xcodeproj */,
 				C7431F0425F51E1D0094C4CF /* ProjectManager */,
 				9BB1595A288FEFC400BECEEB /* ProjectManagerTests */,
+				9BB4C0EA28E95432009D8A25 /* ProjectManager.app */,
+				9BB4C0EB28E95432009D8A25 /* ProjectManagerTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -600,7 +602,7 @@
 			);
 			name = ProjectManagerTests;
 			productName = ProjectManagerTests;
-			productReference = 9BB15959288FEFC400BECEEB /* ProjectManagerTests.xctest */;
+			productReference = 9BB4C0EB28E95432009D8A25 /* ProjectManagerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		C7431F0125F51E1D0094C4CF /* ProjectManager */ = {
@@ -625,7 +627,7 @@
 				9B45247528884DC50011D5D1 /* FirebaseDatabase */,
 			);
 			productName = ProjectManager;
-			productReference = C7431F0225F51E1D0094C4CF /* ProjectManager.app */;
+			productReference = 9BB4C0EA28E95432009D8A25 /* ProjectManager.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -725,7 +727,7 @@
 				9BD40D4D289120C100939532 /* EditViewModelTest.swift in Sources */,
 				9BB15963288FF08000BECEEB /* MockUesCase.swift in Sources */,
 				9B518EA22893E2EB001DB579 /* MockListRepository.swift in Sources */,
-				9BD40D4F289152FF00939532 /* TodoMoveViewModelTest.swift in Sources */,
+				9BD40D4F289152FF00939532 /* MoveViewModelTest.swift in Sources */,
 				9BF4A9D42893858C0098DC1B /* TodoListUseCaseTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
