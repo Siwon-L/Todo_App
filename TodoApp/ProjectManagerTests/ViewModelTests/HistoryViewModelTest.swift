@@ -11,28 +11,33 @@ import RxSwift
 
 class HistoryViewModelTest: XCTestCase {
     var useCase: MockUseCase!
-    var viewModel: DefaultTodoHistoryViewModel!
-    let bag = DisposeBag()
-    let dummyData: [History] = [.init(changes: .added, title: "todo"),
-                                .init(changes: .moved, title: "doing", beforeState: .todo, afterState: .doing),
-                                .init(changes: .removed, title: "done")]
+    var sut: DefaultTodoHistoryViewModel!
+    var bag: DisposeBag!
+    var dummyData: [History]!
     
     override func setUpWithError() throws {
-        useCase = .init()
-        viewModel = .init(useCase: useCase)
+        bag = DisposeBag()
+        dummyData = [
+            .init(changes: .added, title: "todo"),
+            .init(changes: .moved, title: "doing", beforeState: .todo, afterState: .doing),
+            .init(changes: .removed, title: "done")
+        ]
+        useCase = MockUseCase(historyData: dummyData)
+        sut = .init(useCase: useCase)
     }
 
     override func tearDownWithError() throws {
         useCase = nil
-        viewModel = nil
+        sut = nil
+        bag = nil
+        dummyData = nil
     }
     
     func test_UseCase를_통해_HistoryItme을_읽어오는지() {
         // given
-        useCase.historyList.onNext(dummyData)
         
         // when
-        viewModel.historyList
+        sut.historyList
             .bind { cellItems in
                 // then
                 XCTAssertEqual(cellItems.count, self.dummyData.count)
