@@ -148,9 +148,10 @@ extension PageViewController {
 
 extension PageViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let xxx = scrollView.contentOffset.x / view.frame.width
+        let point = scrollView.contentOffset.x / view.frame.width
+        
         if scrollView.isTracking {
-            segmentedControl.xxx(xxx)
+            segmentedControl.moveTo(point)
         }
     }
     
