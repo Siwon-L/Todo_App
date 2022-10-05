@@ -45,10 +45,14 @@ final class PageViewController: UIViewController {
         )
         return control
     }()
-    private lazy var pageViewController: UIPageViewController = {
-        let vc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        
-        return vc
+    
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView(frame: .zero)
+        scrollView.bounces = false
+        scrollView.decelerationRate = .fast
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
     }()
     
     init(
@@ -68,8 +72,6 @@ final class PageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageViewController.dataSource = self
-        pageViewController.delegate = self
         configureUI()
         configureNavigationBar()
         bind()
@@ -103,83 +105,70 @@ extension PageViewController {
             }.disposed(by: bag)
         
         segmentedControl
-            .setAction { [weak self] oldIndex, index in
-            guard let self = self else { return }
-            let direction: UIPageViewController.NavigationDirection = oldIndex <= index ? .forward : .reverse
-            self.pageViewController
-                .setViewControllers(
-                    [self.viewControllers[index]],
-                    direction: direction,
-                    animated: true
+            .setAction { [weak self] index in
+                guard let self = self else { return }
+                self.scrollView.setContentOffset(
+                    CGPoint(
+                        x: self.view.frame.width * Double(index),
+                        y: 0
+                    )
+                    , animated: true
                 )
-        }
+            }
     }
 }
 
 extension PageViewController {
     private func configureUI() {
         view.backgroundColor = .systemBackground
-        addChild(pageViewController)
+        scrollView.contentSize.width = view.frame.width * Double(viewControllers.count)
         view.addSubview(segmentedControl)
-        view.addSubview(pageViewController.view)
+        view.addSubview(scrollView)
+        scrollView.delegate = self
         
         segmentedControl.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(pageViewController.view.snp.top)
+            $0.bottom.equalTo(scrollView.snp.top)
             $0.height.equalToSuperview().multipliedBy(0.05)
         }
         
-        pageViewController.view.snp.makeConstraints {
+        scrollView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
         
-        self.pageViewController
-            .setViewControllers(
-                [viewControllers.first ?? UIViewController()],
-                direction: .reverse,
-                animated: true
-            )
+        Array(0..<viewControllers.count).forEach { index in
+            let vc = viewControllers[index]
+            addChild(vc)
+            scrollView.addSubview(vc.view)
+            vc.view.frame = CGRect(x: view.frame.width * Double(index), y: 0, width: 0, height: 0)
+            vc.didMove(toParent: self)
+        }
     }
 }
 
-extension PageViewController: UIPageViewControllerDataSource {
-    func pageViewController(
-        _ pageViewController: UIPageViewController,
-        viewControllerBefore viewController: UIViewController
-    ) -> UIViewController? {
-        guard let index = viewControllers.firstIndex(of: viewController) else { return nil }
-        let previousIndex = index - 1
-        if previousIndex < 0 {
-            return viewControllers.last
+extension PageViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let xxx = scrollView.contentOffset.x / view.frame.width
+        if scrollView.isTracking {
+            segmentedControl.xxx(xxx)
         }
-        return viewControllers[previousIndex]
     }
     
-    func pageViewController(
-        _ pageViewController: UIPageViewController,
-        viewControllerAfter viewController: UIViewController
-    ) -> UIViewController? {
-        guard let index = viewControllers.firstIndex(of: viewController) else { return nil }
-        let nextIndex = index + 1
-        if nextIndex == viewControllers.count {
-            return viewControllers.first
-        }
-        return viewControllers[nextIndex]
+    func scrollViewWillEndDragging(
+        _ scrollView: UIScrollView,
+        withVelocity velocity: CGPoint,
+        targetContentOffset: UnsafeMutablePointer<CGPoint>
+    ) {
+        let xPoint = targetContentOffset.pointee.x
+        
+        targetContentOffset.pointee.x = round(xPoint / view.frame.width) * view.frame.width
+        
+        let selectedIndex = targetContentOffset.pointee.x / view.frame.width
+        segmentedControl.currentIndex = Int(selectedIndex)
     }
 }
 
-extension PageViewController: UIPageViewControllerDelegate {
-    func pageViewController(
-        _ pageViewController: UIPageViewController,
-        didFinishAnimating finished: Bool,
-        previousViewControllers: [UIViewController],
-        transitionCompleted completed: Bool
-    ) {
-        guard let vc = pageViewController.viewControllers?[0],
-              let index = viewControllers.firstIndex(of: vc) else { return }
-        segmentedControl.selectedSegmentIndex = index
-    }
-}
+
 
 extension PageViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {

@@ -7,38 +7,35 @@
 
 import UIKit
 
+import SnapKit
+
 public final class CUISegmentControl: UISegmentedControl {
-    private var completion: ((Int, Int) -> Void)?
-    private lazy var currentIndex: Int = selectedSegmentIndex {
+    private var completion: ((Int) -> Void)?
+    public lazy var currentIndex: Int = selectedSegmentIndex {
         didSet {
-            if currentIndex != oldValue {
-                completion?(oldValue, currentIndex)
-            }
+            completion?(currentIndex)
+            selectedSegmentIndex = currentIndex
+            configureUI()
         }
     }
     
     private lazy var underlineView: UIView = {
-        let point = self.bounds.size.width / CGFloat(self.numberOfSegments)
-        let width = point * 0.7
-        let height = 2.0
-        let xPosition = point * CGFloat((Double(self.selectedSegmentIndex) + 0.5)) - width / 2
-        let yPosition = self.bounds.size.height - height
-        let frame = CGRect(x: xPosition, y: yPosition, width: width, height: height)
-        let view = UIView(frame: frame)
+        let view = UIView()
         view.backgroundColor = .systemBlue
-        addSubview(view)
         return view
     }()
     
     public override func layoutSubviews() {
         super.layoutSubviews()
+        currentIndex = selectedSegmentIndex
+        configureUI()
+    }
+    
+    public func xxx(_ x: Double) {
         let point = self.bounds.size.width / CGFloat(self.numberOfSegments)
         let width = point * 0.7
-        let underlineFinalXPosition = point * CGFloat((Double(self.selectedSegmentIndex) + 0.5)) - width / 2
-        currentIndex = selectedSegmentIndex
-        UIView.animate(withDuration: 0.1) {
-            self.underlineView.frame.origin.x = underlineFinalXPosition
-        }
+        let underlineFinalXPosition = point * CGFloat((Double(x) + 0.5)) - width / 2
+        self.underlineView.frame.origin.x = underlineFinalXPosition
     }
     
     public override init(items: [Any]?) {
@@ -46,11 +43,10 @@ public final class CUISegmentControl: UISegmentedControl {
         selectedSegmentIndex = 0
         removeBackgroundAndDivider()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     private func removeBackgroundAndDivider() {
         let image = UIImage()
@@ -65,7 +61,21 @@ public final class CUISegmentControl: UISegmentedControl {
         )
     }
     
-    public func setAction(_ action: @escaping (Int, Int) -> Void) {
+    private func configureUI() {
+        addSubview(underlineView)
+        let point = UIScreen.main.bounds.width / CGFloat(self.numberOfSegments)
+        let width = point * 0.7
+        let height = 2.0
+        let yPosition = self.bounds.size.height - height
+        let xPosition = point * CGFloat((Double(self.selectedSegmentIndex) + 0.5)) - width / 2
+        let frame = CGRect(x: xPosition, y: yPosition, width: width, height: height)
+        
+        UIView.animate(withDuration: 0.15) {
+            self.underlineView.frame = frame
+        }
+    }
+    
+    public func setAction(_ action: @escaping (Int) -> Void) {
         completion = action
     }
     
