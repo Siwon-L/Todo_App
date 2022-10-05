@@ -31,10 +31,10 @@ public final class CUISegmentControl: UISegmentedControl {
         configureUI()
     }
     
-    public func moveTo(_ point: Double) {
+    public func moveTo(_ xPoint: Double) {
         let point = self.bounds.size.width / CGFloat(self.numberOfSegments)
         let width = point * 0.7
-        let underlineFinalXPosition = point * CGFloat((Double(point) + 0.5)) - width / 2
+        let underlineFinalXPosition = point * CGFloat((Double(xPoint) + 0.5)) - width / 2
         self.underlineView.frame.origin.x = underlineFinalXPosition
     }
     
