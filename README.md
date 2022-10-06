@@ -1,144 +1,55 @@
-# 프로젝트 관리 앱
+# 📘TodoApp
 
-## PR
-- [STEP 1](https://github.com/yagom-academy/ios-project-manager/pull/125)
-- [STEP 2-1](https://github.com/yagom-academy/ios-project-manager/pull/133)
-- [STEP 2-2](https://github.com/yagom-academy/ios-project-manager/pull/141)
-- [STEP 2-3](https://github.com/yagom-academy/ios-project-manager/pull/151)
+> 해당 프로젝트는 야곰아카테미의 [ios-project-manager](https://github.com/yagom-academy/ios-project-manager)프로젝트를 iPhone 버전으로 리메이크한 프로젝트 입니다.
+>
+> [iPad 버전의 프로젝트 보러가기](https://github.com/saafaaari/ios-project-manager/tree/main)
 
-
-## 외부 라이브러리
+## 사용한 라이브러리
 
 | Local DB | Remote DB | UI | Reactive | Layout |
 |---|---|---|---|---|
 | `Realm` | `Firebase` | `RxCocoa` | `RxSwift` | `SnapKit` |
-
-
-## 의존성 관리도구
-
-| `Swift Package Manager` |
-|---|
 
 ## 구조
 
 | `MVVM-C` | `Clean Architecture` |
 |---|---|
 
-![](https://i.imgur.com/YgUZpW8.png)
 
-구조는 `MVVM-C` 과 `Clean Architecture`를 적용시켰으며,
-때문에 Scene의 의존성을 관리하는 `DIContainer`와, 화면전환을 담당하는 `FlowCoordinator`가 가장 상위 수준에 있으며, `Presentation`, `Domain`, `Data` Layer가 있다. 
+기본적으로 `RxSwift`를 이용한 `MVVM`구조에 추가적으로 `Coordinator`패턴과 `DIContainer`패턴을 사용하여 화면 전환및 의존성을 관리해주었습니다.
 
-![](https://i.imgur.com/PopuMU9.png)
+또한, 전체적인 구조를 `Clean Architecture`를 채택하여, 각 계층의 유연한 수정및 확장이 가능하도록 하였으며, protocol를 이용해 SOLID 원칙을 지킴과 동시에 Testable 할 수 있도록 하였습니다.
 
-위 그림과 같이 `Presentation`와 `Data` Layer는 `Domain` Layer만 의존한다.
+추가적으로, `CustomUIKit`으로 특정 CustomUI 객체를 다른 모듈로 분리하여, 약간의 프로젝트 빌드 속도 단축과 해당 UI가 필요한 파일에만 import하여 사용할 수 있게 객체간 결합도를 낮췄습니다.
 
-## 기능 구현
+## 기능
 
-### UI
 
-![](https://i.imgur.com/7dbq4jN.png)
+| 메인 |
+|-|
+|<img src="https://i.imgur.com/b61i6VX.gif" width="200">|
 
-### 추가 및 수정
+- CustomSegmentControl과 ScrollView를 이용하여 Todo, Doing, Done 세 ViewController를 Pageing 할 수 있도록 구현하였습니다. 
 
 | 추가 | 수정 |
 |-|-|
-|![](https://i.imgur.com/OUgGlBf.gif)|![](https://i.imgur.com/SoftF3k.gif)|
-| 상단에 `UIBarButtonItem`를 클릭하면 item을 추가하기위한 View가 올라오고, Done 버튼을 클릭하면 새로운 todoitem이 생성 | Cell을 클릭후 상단에 Edit 버튼을 클릭하면, 쓰기 모드로 변경 컨텐츠를 변경후 Done 버튼을 클릭하면 todoitem이 수정 |
+|<img src="https://i.imgur.com/PJspzTV.gif" width="200">|<img src="https://i.imgur.com/2W65Nvv.gif" width="200">|
 
-### 지난 게시글 처리
+- 상단 NavigationBar의 Plus Button를 클릭하여, 추가를 위한 화면을 모달 형식으로 present하도록 하였습니다.
+- Cell를 클릭하게 되면, 해당 Cell의 정보가 입력되어 있는 수정 화면이 push 되고, 상단의 Edit button을 Tap하면, 수정 기능이 활성화 됩니다.
 
-| 지난 게시글 날짜 표현 |
-|-|
-| <img src="https://i.imgur.com/nFSyS99.png?"> |
- 기한이 지난 게시글은 날짜 표현을 빨간색으로 처리하여 기한이 지난 글과 그렇지 않은 글을 구분 |
+| 이동 및 삭제 | History |
+|-|-|
+|<img src="https://i.imgur.com/EJKGLaf.gif" width="200">|<img src="https://i.imgur.com/R0FI6SR.gif" width="200">|
 
-### Item 삭제 기능 구현
+- 해당 Cell을 longpress하게 되면 두개의 Moveing Button과 Delete Button이 popover 형식으로 나타나게 됩니다.
+- 상단 NavigationBar의 Watch Button를 클릭면, History 화면으로 전환됩니다. 해당 화면에서 지금까지 기록을 볼 수 있습니다.
 
-![](https://i.imgur.com/3LKDX9a.gif)
+## 테스트
 
-`rx`의 `modelDeleted()` 메서드를 이용하여 삭제 기능을 구현.
+![](https://i.imgur.com/vPYZaCw.png)
 
-```swift
-//  TodoListViewModel.swift
-func cellDeleteButtonDidTap(item: TodoCellContent) {
-    useCase.deleteItem(id: item.id)
-}
-```
-위처럼 viewModel에선 item의 `UUID`을 넘겨 받고, 
+UseCase와 각 화면의 ViewModel에 대해서 Unit Test를 진행하였습니다.
 
-```swift
-//  TodoListUseCase.swift
-func deleteItem(id: UUID) {
-    guard let index = try? repository.read().value()
-        .firstIndex(where: { $0.id == id }) else { return }
-    
-    repository.delete(index: index)
-}
-```
-
-`UseCase`에서 넘겨 받은 `UUID`를 가지고 해당 item의 index를 찾아 `storege`에서 삭제하는 구조를 가지고 있다.
-
-### TableView간 콘텐츠 이동
-
-![](https://i.imgur.com/mPGqvyn.gif)
-
-`Reactive`를 확장시켜 
-```swift
-func listLongPress<T>(_ type: T.Type) -> ControlEvent<(UITableViewCell, T)>
-```
-위 메서드를 통해 `LongPressGesture` 기능을 구현하였고, 두 버튼을 가지고 있는 `TodoMoveViewController`라는 VC를 만들어 popover를 통해 present.
-
-```swift
-//  TodoMoveViewModel.swift
-final class DefaultTodoMoveViewModel {
-    private func setButtonTitle(at state: State) -> (String, String) {
-        switch state {
-        case .todo:
-            return ("Move to DOING", "Move to DONE")
-        case .doing:
-            return ("Move to TODO", "Move to DONE")
-        case .done:
-            return ("Move to TODO", "Move to DOING")
-        }
-    }
-    
-    var buttonTitle: Observable<(String, String)> {
-        let buttonTitle = setButtonTitle(at: item.state)
-        
-        return Observable.just(buttonTitle)
-    }
-}
-```
-해당 VC의 VM은 해당 콘텐츠에 해당하는 item을 가지고 있고, 해당 `item`의 `State`를 `setButtonTitle` 메서드를 통해 두 버튼의 title을 반환 받아 `buttonTitle` 라는 `Observable`통해 결정 된다.
-
-```swift
-//  TodoListUseCase.swift
-extension DefaultTodoListUseCase {
-    func firstMoveState(item: TodoModel) {
-        switch item.state {
-        case .todo:
-            changeTodoItemState(item: item, to: .doing)
-        case .doing:
-            changeTodoItemState(item: item, to: .todo)
-        case .done:
-            changTodoItemState(item: item, to: .todo)
-        }
-    }
-    
-    func secondMoveState(item: TodoModel) {
-        switch item.state {
-        case .todo:
-            changeTodoItemState(item: item, to: .done)
-        case .doing:
-            changeTodoItemState(item: item, to: .done)
-        case .done:
-            changeTodoItemState(item: item, to: .doing)
-        }
-    }
-}
-```
-
-`UseCase`에선 선택된 item을 VM로 부터 전달받아 두 메서드를 통해 item의 수정후 `update` 한다.
-
+각 타입의 의존성을 의존성 주입과 protocol을 사용하여 Testable하게 구현하였으며, Test를 위한 Test Double 타입을 구현하여 독립적인 Test가 될 수 있도록 하였습니다.
 
