@@ -20,6 +20,8 @@
 
 또한, 전체적인 구조를 `Clean Architecture`를 채택하여, 각 계층의 유연한 수정및 확장이 가능하도록 하였으며, protocol를 이용해 SOLID 원칙을 지킴과 동시에 Testable 할 수 있도록 하였습니다.
 
+<img src="https://i.imgur.com/4BJlTVR.png" width="300">
+
 추가적으로, `CustomUIKit`으로 특정 CustomUI 객체를 다른 모듈로 분리하여, 약간의 프로젝트 빌드 속도 단축과 해당 UI가 필요한 파일에만 import하여 사용할 수 있게 객체간 결합도를 낮췄습니다.
 
 ## 기능
