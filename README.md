@@ -37,6 +37,8 @@
 
 - 상단 NavigationBar의 Plus Button를 클릭하여, 추가를 위한 화면을 모달 형식으로 present하도록 하였습니다.
 - Cell를 클릭하게 되면, 해당 Cell의 정보가 입력되어 있는 수정 화면이 push 되고, 상단의 Edit button을 Tap하면, 수정 기능이 활성화 됩니다.
+- 추가및 수정된 데이터는 `Realm`을 이용한 Local DB 저장되고, App이 종료되면, 종료 시점에 입력되어있는 데이터를 `Firebase`를 이용한 Remote DB에 저장됩니다.
+- `Firebase`에 저장되어 있는 데이터는 사용자가 App을 삭제하고, 다시 다운받았을 때 읽어오도록 하였습니다.
 
 | 이동 및 삭제 | History |
 |-|-|
