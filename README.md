@@ -20,7 +20,154 @@
 
 또한, 전체적인 구조를 `Clean Architecture`를 채택하여, 각 계층의 유연한 수정및 확장이 가능하도록 하였으며, protocol를 이용해 SOLID 원칙을 지킴과 동시에 Testable 할 수 있도록 하였습니다.
 
-<img src="https://i.imgur.com/4BJlTVR.png" width="300">
+```
+├── CustomUIKit
+│   ├── CustomUIKit
+│   │   ├── CustomUIHeaderView.swift
+│   │   ├── CustomUIKit.docc
+│   │   │   └── CustomUIKit.md
+│   │   ├── CustomUIKit.h
+│   │   ├── CustomUISegmentControl.swift
+│   │   └── CustomUITableView.swift
+│   ├── CustomUIKit.xcodeproj
+│   │   ├── project.pbxproj
+│   │   ├── project.xcworkspace
+│   │   │   ├── contents.xcworkspacedata
+│   │   │   └── xcshareddata
+│   │   │       └── IDEWorkspaceChecks.plist
+│   │   └── xcuserdata
+│   │       └── isiwon.xcuserdatad
+│   │           └── xcschemes
+│   │               └── xcschememanagement.plist
+│   └── CustomUIKitTests
+│       └── CustomUIKitTests.swift
+├── README.md
+└── TodoApp
+    ├── ProjectManager
+    │   ├── Application
+    │   │   ├── AppDelegate.swift
+    │   │   ├── DIContainer
+    │   │   │   └── MainSceneDIContainer.swift
+    │   │   ├── GoogleService-Info.plist
+    │   │   └── SceneDelegate.swift
+    │   ├── Assets.xcassets
+    │   │   ├── AccentColor.colorset
+    │   │   │   └── Contents.json
+    │   │   ├── AppIcon.appiconset
+    │   │   │   └── Contents.json
+    │   │   └── Contents.json
+    │   ├── Base.lproj
+    │   │   └── LaunchScreen.storyboard
+    │   ├── Data
+    │   │   ├── MappingEntities
+    │   │   │   ├── HistoryEntity+Realm.swift
+    │   │   │   ├── TodoEntity+Firebase.swift
+    │   │   │   └── TodoEntity+Realm.swift
+    │   │   ├── PersistentStorages
+    │   │   │   ├── FirebaseTodoListStorage.swift
+    │   │   │   ├── RealmHistoryStorage.swift
+    │   │   │   └── RealmTodoListStorage.swift
+    │   │   ├── Repositories
+    │   │   │   ├── DefaultHistoryRepository.swift
+    │   │   │   └── DefaultTodoListRepository.swift
+    │   │   └── Uitils
+    │   │       └── Protocols
+    │   │           └── ErrorThrowble.swift
+    │   ├── Domain
+    │   │   ├── Entities
+    │   │   │   ├── History.swift
+    │   │   │   └── TodoModel.swift
+    │   │   ├── Interfaces
+    │   │   │   └── Repositories
+    │   │   │       ├── HistoryRepository.swift
+    │   │   │       └── TodoListRepository.swift
+    │   │   └── UseCase
+    │   │       └── TodoListUseCase.swift
+    │   ├── Errors
+    │   │   └── TodoError.swift
+    │   ├── Info.plist
+    │   ├── Presentation
+    │   │   ├── Edit&Create
+    │   │   │   ├── View
+    │   │   │   │   ├── CommonView.swift
+    │   │   │   │   ├── CreateView.swift
+    │   │   │   │   ├── CreateViewController.swift
+    │   │   │   │   ├── EditView.swift
+    │   │   │   │   └── EditViewController.swift
+    │   │   │   └── ViewModel
+    │   │   │       ├── CreateViewModel.swift
+    │   │   │       └── EditViewModel.swift
+    │   │   ├── History
+    │   │   │   ├── View
+    │   │   │   │   ├── HistoryCell.swift
+    │   │   │   │   └── HistoryViewController.swift
+    │   │   │   └── ViewModel
+    │   │   │       ├── HistoryCellContent.swift
+    │   │   │       └── HistoryViewModel.swift
+    │   │   ├── MainFlowCoordinator.swift
+    │   │   ├── MainList
+    │   │   │   ├── ContentList
+    │   │   │   │   ├── View
+    │   │   │   │   │   ├── ContentListView.swift
+    │   │   │   │   │   └── ContentListViewController.swift
+    │   │   │   │   └── ViewModel
+    │   │   │   │       ├── ContentCellItem.swift
+    │   │   │   │       └── ContentListViewModel.swift
+    │   │   │   ├── View
+    │   │   │   │   ├── PageViewController.swift
+    │   │   │   │   └── TodoListCell.swift
+    │   │   │   └── ViewModel
+    │   │   │       └── PageViewModel.swift
+    │   │   ├── Move
+    │   │   │   ├── View
+    │   │   │   │   └── MoveViewController.swift
+    │   │   │   └── ViewModel
+    │   │   │       └── MoveViewModel.swift
+    │   │   └── Utils
+    │   │       ├── Extensions
+    │   │       │   ├── CUIHeaderView+Reactive.swift
+    │   │       │   └── Date+ToString.swift
+    │   │       └── Protocols
+    │   │           └── CellIdentifiable.swift
+    │   └── Utils
+    │       └── Extensions
+    │           ├── Collection+Subscript.swift
+    │           ├── Reactive+ItemSelected.swift
+    │           └── Reactive+LongPress.swift
+    ├── ProjectManager.xcodeproj
+    │   ├── project.pbxproj
+    │   ├── project.xcworkspace
+    │   │   ├── contents.xcworkspacedata
+    │   │   ├── xcshareddata
+    │   │   │   ├── IDEWorkspaceChecks.plist
+    │   │   │   └── swiftpm
+    │   │   │       ├── Package.resolved
+    │   │   │       └── configuration
+    │   │   └── xcuserdata
+    │   │       └── isiwon.xcuserdatad
+    │   │           └── UserInterfaceState.xcuserstate
+    │   ├── xcshareddata
+    │   │   └── xcschemes
+    │   │       └── ProjectManager.xcscheme
+    │   └── xcuserdata
+    │       └── isiwon.xcuserdatad
+    │           └── xcschemes
+    │               └── xcschememanagement.plist
+    └── ProjectManagerTests
+        ├── UseCaseTests
+        │   ├── MockHistoryRepository.swift
+        │   ├── MockListRepository.swift
+        │   └── TodoListUseCaseTest.swift
+        └── ViewModelTests
+            ├── ContentListViewModelTest.swift
+            ├── CreateViewModelTest.swift
+            ├── EditViewModelTest.swift
+            ├── HistoryViewModelTest.swift
+            ├── MockUesCase.swift
+            ├── MoveViewModelTest.swift
+            └── PageViewModelTest.swift
+
+```
 
 추가적으로, `CustomUIKit`으로 특정 CustomUI 객체를 다른 모듈로 분리하여, 약간의 프로젝트 빌드 속도 단축과 해당 UI가 필요한 파일에만 import하여 사용할 수 있게 객체간 결합도를 낮췄습니다.
 
